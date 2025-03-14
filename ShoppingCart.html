@@ -5,72 +5,66 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="assets/css/style.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <style>
-    @media (max-width: 576px) {
-      .responsive-cart-img {
-        max-width: 350px;
-      }
-    }
-  </style>
 
 </head>
 
 <body style="background-color: #B7C9B2;">
 
-<!-- navbar with logo and account button -->
+<!-- navbar with logo and account button, logo -->
 <nav class="navbar navbar-expand-sm navbar-light mb-2" style="background-color: #80a080;">
   <div class="container d-flex align-items-center justify-content-between flex-nowrap">
     <div class="d-flex align-items-center flex-nowrap">
       <a href="index.html" class="me-3">
         <img class="img-fluid" style="width:60px;" src="assets/images/logo.svg" alt="logo">
       </a>
-      <h1 class="mb-0 fs-4">LukEshop</h1>
+      <h1 class="mb-0 fs-4"><a href="index.html" class="text-dark text-decoration-none">LukEshop</a></h1>
     </div>
     <div class="d-flex align-items-center flex-nowrap">
-      <button type="button" class="btn btn-secondary me-3 px-4">Account</button>
-      <h1 class="ms-3"><i class="bi bi-person-lock"></i></h1>
+      <a type="button" class="btn btn-secondary me-3 px-4" href="login_page.html">Account</a>
+      <h1 class="ms-3"><a href="login_page.html" class="text-dark"><i class="bi bi-person-lock"></i></a></h1>
     </div>
   </div>
 </nav>
 
-<!-- search box and shopping cart icon -->
-<div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2">
+
+<!-- search box and shoping cart icon -->
+<div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
   <div class="flex-grow-1 d-flex justify-content-center">
     <div class="py-2" style="width: 60%;">
-      <input type="text" class="form-control col-8 col-sm-12" placeholder="Search box" />
+      <input type="text" class="form-control col-8 col-sm-12 " placeholder="Search box" />
     </div>
   </div>
   <div>
-    <h2 class="mb-0 px-1"><i class="bi bi-bag-fill"></i></h2>
+    <h2 class="mb-0 px-1"><a href="ShoppingCart.html" class="text-dark"><i class="bi bi-bag-fill"></i></a></h2>
   </div>
 </div>
 
 <!-- quick select -->
-<div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2">
+<div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">
   <div class="row g-3">
     <div class="col-6 col-md">
-      <button type="button" class="btn btn-light w-100">QuickSelect1</button>
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">QuickSelect1</a>
     </div>
     <div class="col-6 col-md">
-      <button type="button" class="btn btn-light w-100">QuickSelect2</button>
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">QuickSelect2</a>
     </div>
     <div class="col-6 col-md">
-      <button type="button" class="btn btn-light w-100">QuickSelect3</button>
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">QuickSelect3</a>
     </div>
     <div class="col-6 col-md">
-      <button type="button" class="btn btn-light w-100">QuickSelect4</button>
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">QuickSelect4</a>
     </div>
     <div class="col-6 col-md">
-      <button type="button" class="btn btn-light w-100">QuickSelect5</button>
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">QuickSelect5</a>
     </div>
   </div>
 </div>
 
 <!-- Shopping Cart Section -->
-<div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2">
-  <h2 class="mb-3">Nákupný košík</h2>
+<div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
+  <h2 class="mb-3">Shopping Cart</h2>
 
   <!--------------------- item in Cart -------------------->
   <div class="row mb-3 p-2 rounded-2" style="background-color: #b9d2b6;">
@@ -244,15 +238,51 @@
 
 
   <!-- ORDER NOW a Total Price -->
-  <div class="row mt-4">
-    <div class="col-12 col-md-6 mb-3 mb-md-0">
-      <button class="btn btn-success w-100 w-md-auto">ORDER NOW</button>
-    </div>
-    <div class="col-12 col-md-6 text-md-end">
-      <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: ------</p>
+  <div class="row mt-4 ms-5">
+    <div class="container container d-flex align-items-center justify-content-between">
+
+      <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <button class="btn btn-success btn-lg">ORDER NOW</button>
+      </div>
+      <div class="text-md-end">
+        <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: ------</p>
+      </div>
     </div>
   </div>
 </div>
+<!-- footer -->
+<footer class="mt-auto py-4 mt-2" style="background-color: #80a080;">
+  <div class="container">
+    <div class="row text-center text-md-start justify-content-between align-items-center">
+      
+      <!-- Address -->
+      <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+        <i class="bi bi-geo-alt-fill fs-4 me-2"></i>
+        <div>
+          <div>Ilkovičova 6276/2</div>
+          <strong>842 16 Bratislava 4</strong>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="col-12 col-lg-2 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+        <i class="bi bi-telephone-fill fs-4 me-2"></i>
+        <div>
+          <strong>+421 905 194 679 </strong>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center">
+        <i class="bi bi-envelope-fill fs-4 me-2"></i>
+        <div>
+          <a class="text-decoration-none text-dark fw-bold" aria-disabled="true"><strong>customer_helpline@LukEshop.com</strong></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
