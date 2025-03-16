@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Luky E-S')
 
 @section('content')
   <!-- navbar with logo and account button, logo -->
