@@ -1,0 +1,211 @@
+@extends('layouts.app')
+
+@section('title', 'Luky E-S')
+
+@section('content')
+  <!-- navbar with logo and account button, logo -->
+  <nav class="navbar navbar-expand-sm navbar-light mb-2" style="background-color: #80a080;">
+    <div class="container d-flex align-items-center justify-content-between flex-nowrap">
+      <div class="d-flex align-items-center flex-nowrap">
+        <a href="{{ route('index') }}" class="me-3">
+          <img class="img-fluid" style="width:60px;" src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+        </a>
+        <h1 class="mb-0 fs-4">
+          <a href="{{ route('index') }}" class="text-dark text-decoration-none">LukEshop</a>
+        </h1>
+      </div>
+      <div>
+      </div>
+      <div class="d-flex align-items-center flex-nowrap">
+        <!-- temporary admin access until php login is functional -->
+        <h1 class="me-4">
+            <div class="dropdown">
+                @if(auth()->check())
+                    <button class="btn btn-secondary me-3 px-4 dropdown-toggle no-caret" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ auth()->user()->username }}
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                @else
+                    <button class="btn btn-secondary me-3 px-4" disabled>guest</button>
+                @endif
+            </div>
+
+        </h1>
+
+        <h1 class="ms-3">
+          <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
+        </h1>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- search box and shopping cart icon -->
+  <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
+    <div class="flex-grow-1 d-flex justify-content-center ps-5">
+      <div class="py-2" style="width: 60%;">
+        <input type="text" class="form-control col-8 col-sm-12" placeholder="Search box" />
+      </div>
+    </div>
+    <div>
+      <h2 class="mb-0 px-1">
+          <a href="{{ route('shoppingCart') }}" class="text-dark">
+              <i class="bi bi-bag-fill"></i>
+          </a>
+
+        </a>
+      </h2>
+    </div>
+  </div>
+
+  <!-- quick select -->
+  <div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">
+    <div class="row g-3">
+      <div class="col-6 col-md">
+        <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Luky</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Kuše</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Praky</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Príslušenstvo</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Ostatné</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- carousel -->
+  <div class="container rounded-2 p-2 pt-4 my-2 shadow" style="background-color: #80a080;">
+    <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+          <div class="d-flex flex-column flex-md-row align-items-center">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <img src="{{ asset('assets/images/normal-bow-and-arrow.webp') }}" class="img-fluid w-50" alt="...">
+            </div>
+            <div class="col-md-6 text-center text-md-start">
+              <h5>First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+          <div class="d-flex flex-column flex-md-row align-items-center">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <img src="{{ asset('assets/images/compound-bow-and-arrow.webp') }}" class="img-fluid w-50" alt="...">
+            </div>
+            <div class="col-md-6 text-center text-md-start">
+              <h5>Second slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+          <div class="d-flex flex-column flex-md-row align-items-center">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <img src="{{ asset('assets/images/compound-bow.webp') }}" class="img-fluid w-50" alt="...">
+            </div>
+            <div class="col-md-6 text-center text-md-start p-3">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <div class="carousel-indicators position-static">
+          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- overview -->
+  <div class="container shadow mb-2 p-3 rounded-2" style="background-color: #80a080;">
+    <div class="row g-4">
+      <!-- Column 1 -->
+      <div class="col-6 col-lg-3 d-flex flex-column align-items-center">
+        <div class="d-flex justify-content-center align-items-center" style="background-color: white; border-radius: 50%; width: 200px; height: 200px; overflow: hidden;">
+          <img src="{{ asset('assets/images/desc_crossbow.webp') }}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" alt="Image 1">
+        </div>
+        <div>
+          <p>Relevant description for image 1.</p>
+        </div>
+      </div>
+      <!-- Column 2 -->
+      <div class="col-6 col-lg-3 d-flex flex-column align-items-center">
+        <div class="d-flex justify-content-center align-items-center" style="background-color: white; border-radius: 50%; width: 200px; height: 200px; overflow: hidden;">
+          <img src="{{ asset('assets/images/desc_long-bowwebp.webp') }}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" alt="Image 2">
+        </div>
+        <div>
+          <p>Relevant description for image 2.</p>
+        </div>
+      </div>
+      <!-- Column 3 -->
+      <div class="col-6 col-lg-3 d-flex flex-column align-items-center">
+        <div class="d-flex justify-content-center align-items-center" style="background-color: white; border-radius: 50%; width: 200px; height: 200px; overflow: hidden;">
+          <img src="{{ asset('assets/images/desc_mechanical-bow.webp') }}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" alt="Image 3">
+        </div>
+        <div>
+          <p>Relevant description for image 3.</p>
+        </div>
+      </div>
+      <!-- Column 4 -->
+      <div class="col-6 col-lg-3 d-flex flex-column align-items-center">
+        <div class="d-flex justify-content-center align-items-center" style="background-color: white; border-radius: 50%; width: 200px; height: 200px; overflow: hidden;">
+          <img src="{{ asset('assets/images/desc_normal-bow.avif') }}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" alt="Image 4">
+        </div>
+        <div>
+          <p>Relevant description for image 4.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="mt-auto py-4" style="background-color: #80a080;">
+    <div class="container">
+      <div class="row text-center text-md-start justify-content-between align-items-center">
+        <!-- Address -->
+        <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+          <i class="bi bi-geo-alt-fill fs-4 me-2"></i>
+          <div>
+            <div>Ilkovičova 6276/2</div>
+            <strong>842 16 Bratislava 4</strong>
+          </div>
+        </div>
+        <!-- Phone -->
+        <div class="col-12 col-lg-2 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+          <i class="bi bi-telephone-fill fs-4 me-2"></i>
+          <div>
+            <strong>+421 905 194 679</strong>
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center">
+          <i class="bi bi-envelope-fill fs-4 me-2"></i>
+          <div>
+            <a class="text-decoration-none text-dark fw-bold" aria-disabled="true">
+              <strong>customer_helpline@LukEshop.com</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+@endsection
