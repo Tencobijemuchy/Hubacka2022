@@ -4,47 +4,43 @@
 @section('content')
   <!-- navbar with logo and account button, logo -->
   <nav class="navbar navbar-expand-sm navbar-light mb-2" style="background-color: #80a080;">
-    <div class="container d-flex align-items-center justify-content-between flex-nowrap">
-      <div class="d-flex align-items-center flex-nowrap">
-        <a href="{{ route('index') }}" class="me-3">
-          <img class="img-fluid" style="width:60px;" src="{{ asset('assets/images/logo.svg') }}" alt="logo">
-        </a>
-        <h1 class="mb-0 fs-4">
-          <a href="{{ route('index') }}" class="text-dark text-decoration-none">LukEshop</a>
-        </h1>
+      <div class="container d-flex align-items-center justify-content-between flex-nowrap">
+          <div class="d-flex align-items-center flex-nowrap">
+              <a href="{{ route('index') }}" class="me-3">
+                  <img class="img-fluid" style="width:60px;" src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+              </a>
+              <h1 class="mb-0 fs-4">
+                  <a href="{{ route('index') }}" class="text-dark text-decoration-none">LukEshop</a>
+              </h1>
+          </div>
+          <div>
+          </div>
+          <div class="d-flex align-items-center flex-nowrap">
+              <!-- temporary admin access until php login is functional -->
+
+              <div class="dropdown">
+                  @if(auth()->check())
+                      <button class="btn btn-secondary me-3 px-4 dropdown-toggle no-caret" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ auth()->user()->username }}
+                      </button>
+
+                      <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                          <li>
+                              <form action="{{ route('logout') }}" method="POST">
+                                  @csrf
+                                  <button type="submit" class="dropdown-item">Logout</button>
+                              </form>
+                          </li>
+                      </ul>
+                  @else
+                      <button class="btn btn-secondary me-3 px-4" disabled>guest</button>
+                  @endif
+              </div>
+              <h1 class="ms-3">
+                  <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
+              </h1>
+          </div>
       </div>
-      <div>
-      </div>
-      <div class="d-flex align-items-center flex-nowrap">
-        <!-- temporary admin access until php login is functional -->
-        <h1 class="me-4">
-            <div class="dropdown">
-                @if(auth()->check())
-                    <button class="btn btn-secondary me-3 px-4 dropdown-toggle no-caret" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ auth()->user()->username }}
-                    </button>
-
-                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                @else
-                    <button class="btn btn-secondary me-3 px-4" disabled>guest</button>
-                @endif
-            </div>
-
-        </h1>
-
-        <h1 class="ms-3">
-          <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
-        </h1>
-
-      </div>
-    </div>
   </nav>
 
   <!-- search box and shopping cart icon -->
