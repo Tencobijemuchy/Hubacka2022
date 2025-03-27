@@ -81,6 +81,14 @@
             </select>
           </div>
           <div class="mb-3">
+            <label for="filter_grip_orientation" class="form-label">Úchop</label>
+            <select id="filter_grip_orientation" class="form-select">
+              <option>Nezadané</option>
+              <option>Pravý</option>
+              <option>Ľavý</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label for="filter_manufacturer" class="form-label">Výrobca</label>
             <select id="filter_manufacturer" class="form-select">
               <option>Všetci</option>
@@ -185,32 +193,10 @@
       { title: "Red Deer", price: "325,99€", image: "assets/images/redDeer/products_red_deer.png" },
       { title: "Skylark", price: "199,89€", image: "assets/images/skylark/Skylark__55835.png" },
       { title: "Symphony", price: "281,49€", image: "assets/images/symphony/Symphony-1-1__07117.jpg" },
-      { title: "White Tail", price: "299,99€", image: "assets/images/whitetail/products_whitetail.png" },
-      { title: "Skaut Padouk", price: "218,49€", image: "assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp" },
-      { title: "Cobra", price: "296,75€", image: "assets/images/cobra/cobrat250.png" },
-      { title: "Falcon", price: "226,15€", image: "assets/images/falcon/products_falcon.png" },
-      { title: "Black Hawk", price: "319,89€", image: "assets/images/blackHawk/products_black_hawk.png" },
-      { title: "Ghost", price: "312,99€", image: "assets/images/ghost/Ghost-1__46356.jpg" },
-      { title: "Immortal", price: "289,49€", image: "assets/images/imortal/Immortal_2__04600.jpg" },
-      { title: "Kartal", price: "243,99€", image: "assets/images/kartal/Kartal__71859.webp" },
-      { title: "Red Deer", price: "325,99€", image: "assets/images/redDeer/products_red_deer.png" },
-      { title: "Skylark", price: "199,89€", image: "assets/images/skylark/Skylark__55835.png" },
-      { title: "Symphony", price: "281,49€", image: "assets/images/symphony/Symphony-1-1__07117.jpg" },
-      { title: "White Tail", price: "299,99€", image: "assets/images/whitetail/products_whitetail.png" },
-      { title: "Skaut Padouk", price: "218,49€", image: "assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp" },
-      { title: "Cobra", price: "296,75€", image: "assets/images/cobra/cobrat250.png" },
-      { title: "Falcon", price: "226,15€", image: "assets/images/falcon/products_falcon.png" },
-      { title: "Black Hawk", price: "319,89€", image: "assets/images/blackHawk/products_black_hawk.png" },
-      { title: "Ghost", price: "312,99€", image: "assets/images/ghost/Ghost-1__46356.jpg" },
-      { title: "Immortal", price: "289,49€", image: "assets/images/imortal/Immortal_2__04600.jpg" },
-      { title: "Kartal", price: "243,99€", image: "assets/images/kartal/Kartal__71859.webp" },
-      { title: "Red Deer", price: "325,99€", image: "assets/images/redDeer/products_red_deer.png" },
-      { title: "Skylark", price: "199,89€", image: "assets/images/skylark/Skylark__55835.png" },
-      { title: "Symphony", price: "281,49€", image: "assets/images/symphony/Symphony-1-1__07117.jpg" },
-      { title: "White Tail", price: "299,99€", image: "assets/images/whitetail/products_whitetail.png" },
+      { title: "White Tail", price: "299,99€", image: "assets/images/whitetail/products_whitetail.png" }
     ];
   
-    const productsPerPage = 12;
+    const productsPerPage = 6;
     let currentPage = 1;
   
     function displayProducts() {

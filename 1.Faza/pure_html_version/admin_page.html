@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Luky E-S</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="assets/css/style.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </head>
+      
+      <body class="bg-light">
+
+        <!-- navbar with logo and account button, logo -->
+        <nav class="navbar navbar-expand-sm navbar-light mb-2 bg-dark">
+            <div class="container d-flex align-items-center justify-content-between flex-nowrap">
+            <div class="d-flex align-items-center flex-nowrap">
+                <a href="#" class="me-3">
+                    <img class="img-fluid" style="width:60px;" src="assets/images/logo.svg" alt="logo">
+                </a>
+                <h1 class="mb-0 fs-4"><a href="#" class="text-white text-decoration-none">LukEshop</a></h1>
+            </div>
+            <div></div>
+            <h1 class="pe-5 text-white">Admin</h1>
+            <div>
+            </div>
+                <div class="d-flex align-items-center flex-nowrap">
+                    <a type="button" class="btn btn-danger d-flex align-items-center" href="index.html"><i class="bi bi-person-dash fs-4 me-2"></i>Log out</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- quick select -->
+        <div class="container rounded-2 p-3 mt-2 shadow bg-dark mb-2">
+            <div class="row g-3">
+              <div class="col-6 col-md">
+                <a type="button" class="btn btn-light w-100" href="#">Luky</a>
+              </div>
+              <div class="col-6 col-md">
+                <a type="button" class="btn btn-light w-100" href="#">Kuše</a>
+              </div>
+              <div class="col-6 col-md">
+                <a type="button" class="btn btn-light w-100" href="#">Praky</a>
+              </div>
+              <div class="col-6 col-md">
+                <a type="button" class="btn btn-light w-100" href="#">Šípy</a>
+              </div>
+              <div class="col-6 col-md">
+                <a type="button" class="btn btn-light w-100" href="#">Príslušenstvo</a>
+              </div>
+            </div>
+          </div>
+
+        <div class="container d-flex justify-content-center">
+            <div class="btn btn-danger fs-5 px-3 mb-2" type="button" data-bs-toggle="modal" data-bs-target="#modalChooseProduct"><i class="bi bi-folder-plus"></i> Add Item</div>
+        </div>
+
+        <div class="container bg-dark rounded-2 gap-3 p-2">
+            
+
+            <!-- admin item -->
+            <div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+                <div class="row w-100">
+                    <!-- Image Column -->
+                    <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+                        <img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp" class="img-fluid" style="height: 200px;">
+                    </div>
+            
+                    <!-- Description + Buttons Column -->
+                    <div class="col-9 col-md-10 d-flex flex-column">
+                        <!-- Product Information -->
+                        <div>
+                            <h3 class="py-2">Lazecký</h3>
+                            <span>Dlhý luk pre začiatočníkov aj profíkov</span></br>
+                        </div>
+            
+                        <!-- Buttons aligned at the bottom -->
+                        <div class="d-flex justify-content-between mt-auto gap-2">
+                           <div>
+                                <button class="btn btn-warning active">Price : 149,99€</button> 
+                           </div>
+                            <div>
+                                <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                                    <i class="bi bi-gear"></i> Edit
+                                </button>
+                                <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- admin item -->
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center d-flex justify-content-center align-items-center">
+            <img src="assets/images/cobra/cobrat250.png" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Cobra</h3>
+                <span>Silný a presný luk vhodný pre športové aj rekreačné využitie</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 296,75€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/falcon/products_falcon.png" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Falcon</h3>
+                <span>Výkonný luk inšpirovaný prírodou</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 226,15€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/blackHawk/products_black_hawk.png" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Black Hawk</h3>
+                <span>Rýchly a presný luk pre skúsených strelcov</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 319,89€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/ghost/Ghost-1__46356.jpg" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Ghost</h3>
+                <span>Tichý, presný luk s moderným dizajnom</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 312,99€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/imortal/Immortal_2__04600.jpg" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Immortal</h3>
+                <span>Odolný luk s výnimočnou presnosťou</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 289,49€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/kartal/Kartal__71859.webp" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Kartal</h3>
+                <span>Perfektná rovnováha medzi silou a presnosťou</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 243,99€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/redDeer/products_red_deer.png" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Red Deer</h3>
+                <span>Klasický luk s vysokou odolnosťou</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 325,99€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/skylark/Skylark__55835.png" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Skylark</h3>
+                <span>Ľahký a rýchly luk pre presnú streľbu</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 199,89€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/symphony/Symphony-1-1__07117.jpg" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">Symphony</h3>
+                <span>Elegantný luk s vysokou presnosťou</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 281,49€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
+    <div class="row w-100">
+        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
+            <img src="assets/images/whitetail/products_whitetail.png" class="img-fluid" style="height: 200px;">
+        </div>
+
+        <div class="col-9 col-md-10 d-flex flex-column">
+            <div>
+                <h3 class="py-2">White Tail</h3>
+                <span>Vysokokvalitný luk pre profesionálov</span></br>
+            </div>
+
+            <div class="d-flex justify-content-between mt-auto gap-2">
+                <div>
+                    <button class="btn btn-warning active">Price : 299,99€</button> 
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalModify">
+                        <i class="bi bi-gear"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            
+
+        </div>
+        
+          
+
+<!-- Choose product Modal -->  
+  <div class="modal fade" id="modalChooseProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="bi bi-folder-plus"></i> Add new product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="was-validated" method="" action="">
+                <label for="product_type" class="col-4 col-form-label">Product type</label>
+                <div class="col">
+                    <select id="orientation" class="form-select" required>
+                        <option value="" selected disabled>Select type</option>
+                        <option value="1">Luk</option>
+                        <option value="2">Kuša</option>
+                        <option value="3">Prak</option>
+                        <option value="4">Šíp</option>
+                        <option value="5">Ostatné</option>
+                    </select>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-between px-5">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalModify"><i class="bi bi-journal-bookmark me-2"></i> Choose</button>
+                </div>
+            </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Add Modal -->  
+  <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="bi bi-folder-plus"></i> Add new product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="was-validated" method="" action="">
+                <label for="name" class="col-4 col-form-label">ID</label>
+                <div class="col">
+                    <input type="text" class="form-control" name="product_id" id="product_id" placeholder="product_id" value="" disabled>
+                </div>
+
+                <label for="name" class="col-4 col-form-label">Name</label>
+                <div class="col">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="" required>
+                </div>
+
+                <label for="desciprion" class="col-4 col-form-label pt-4">Description</label>
+                <div class="col">
+                    <textarea class="form-control" name="desciprion" id="desciprion" placeholder="Desciprion" rows="4" required ></textarea>
+                </div>
+
+                <label for="Price" class="col-4 col-form-label pt-4">Price</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="Price" id="Price" placeholder="Price" required>
+                </div>
+
+                <label for="bow_lenght" class="col-4 col-form-label pt-4">Bow lenght</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="bow_lenght" id="bg-dark" placeholder="Bow lenght" required>
+                </div>
+
+                <label for="draw_weight" class="col-4 col-form-label pt-4">Draw weight</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="draw_weight" id="draw_weight" placeholder="Draw weight" required>
+                </div>
+
+                <label for="orientation" class="col-4 col-form-label pt-4">Orientation</label>
+                <div class="col">
+                    <select id="orientation" class="form-select" required>
+                        <option value="" selected disabled>Select orientation</option>
+                        <option value="ľavý">Left</option>
+                        <option value="pravý">Right</option>
+                    </select>
+                </div>
+
+       
+
+
+                <label for="Photo1" class="col-4 col-form-label pt-4">Photo1</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo1" id="Photo1" placeholder="Fotka pizze" required>
+                </div>
+
+                <label for="Photo2" class="col-4 col-form-label pt-4">Photo2</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo2" id="Photo2" placeholder="Fotka pizze" required>
+                </div>
+
+                <label for="Photo3" class="col-4 col-form-label pt-4">Photo3</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo3" id="Photo3" placeholder="Fotka pizze">
+                </div>
+
+                <label for="Photo4" class="col-4 col-form-label pt-4">Photo4</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo4" id="Photo4" placeholder="Fotka pizze">
+                </div>
+
+            </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-between px-5">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+            <button type="button" class="btn btn-success"><i class="bi bi-folder-plus"></i> Add</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- Edit Modal -->  
+  <div class="modal fade" id="modalModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Specify product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="GET">
+                <label for="name" class="col-4 col-form-label">ID</label>
+                <div class="col">
+                    <input type="text" class="form-control" name="product_id" id="product_id" placeholder="product_id" value="" disabled>
+                </div>
+
+                <label for="name" class="col-4 col-form-label">Name</label>
+                <div class="col">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="" required>
+                </div>
+
+                <label for="desciprion" class="col-4 col-form-label pt-4">Description</label>
+                <div class="col">
+                    <textarea class="form-control" name="desciprion" id="desciprion" placeholder="Desciprion" rows="4" required ></textarea>
+                </div>
+
+                <label for="Price" class="col-4 col-form-label pt-4">Price</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="Price" id="Price" placeholder="Price" required>
+                </div>
+
+                <label for="bow_lenght" class="col-4 col-form-label pt-4">Bow lenght</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="bow_lenght" id="bg-dark" placeholder="Bow lenght" required>
+                </div>
+
+                <label for="draw_weight" class="col-4 col-form-label pt-4">Draw weight</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="draw_weight" id="draw_weight" placeholder="Draw weight" required>
+                </div>
+
+                <label for="orientation" class="col-4 col-form-label pt-4">Orientation</label>
+                <div class="col">
+                    <select id="orientation" class="form-select" required>
+                        <option value="" selected disabled>Select orientation</option>
+                        <option value="ľavý">Left</option>
+                        <option value="pravý">Right</option>
+                    </select>
+                </div>
+
+                <label for="Photo1" class="col-4 col-form-label pt-4">Photo1</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo1" id="Photo1" placeholder="Fotka pizze">
+                </div>
+
+                <label for="Photo2" class="col-4 col-form-label pt-4">Photo2</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo2" id="Photo2" placeholder="Fotka pizze">
+                </div>
+
+                <label for="Photo3" class="col-4 col-form-label pt-4">Photo3</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo3" id="Photo3" placeholder="Fotka pizze">
+                </div>
+
+                <label for="Photo4" class="col-4 col-form-label pt-4">Photo4</label>
+                <div class="col">
+                    <input type="file" class="form-control" name="Photo4" id="Photo4" placeholder="Fotka pizze">
+                </div>
+
+                <div class="modal-footer d-flex justify-content-between px-5">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <!-- Delete Modal -->  
+    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Permanently delete this product?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row align-items-center g-2">
+                <div class="col-4">
+                    <img id="delete_modal_product_foto" class="img-fluid" src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp">
+                </div>
+                <div class="col">
+                    <h4 id="delete_modal_product_heading" class="py-3">Lazecký</h4>
+                    <span id="delete_modal_product_description">Dlhý luk pre začiatočníkov aj profíkov</span>
+                    <span id="delete_modal_product_price">149,99€</span>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between px-5">
+              <button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn btn-success px-4"><i class="bi bi-trash me-2"></i>Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>

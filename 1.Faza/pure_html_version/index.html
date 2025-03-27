@@ -10,6 +10,11 @@
       </head>
       
       <body style="background-color: #B7C9B2;">
+
+        
+        
+
+
           <!-- navbar with logo and account button, logo -->
           <nav class="navbar navbar-expand-sm navbar-light mb-2" style="background-color: #80a080;">
             <div class="container d-flex align-items-center justify-content-between flex-nowrap">
@@ -30,6 +35,10 @@
             </div>
           </nav>
       
+
+          <div id="Alert_Popup"></div> 
+          
+
           
           <!-- search box and shoping cart icon -->
           <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
@@ -214,7 +223,32 @@
             </div>
           </footer>
           
-
+          <script>
+            window.addEventListener('DOMContentLoaded', function() {
+              const alertInfo = JSON.parse(localStorage.getItem('alertInfo'));
+        
+              if (alertInfo) {
+                const alertHTML = `
+                  <div id="Alert_Popup" class="alert alert-${alertInfo.farba} alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <i class="bi bi-${alertInfo.ikona} fs-4 px-2"></i>
+                    <span class="fs-5">${alertInfo.text}</span>
+                  </div>
+                `;
+        
+                document.getElementById('Alert_Popup').innerHTML = alertHTML;
+        
+                // Automatically close the alert after 5 seconds
+                setTimeout(function() {
+                  const alert = bootstrap.Alert.getOrCreateInstance('#Alert_Popup');
+                  alert.close();
+                }, 8000);
+        
+                // Clear the alert data from localStorage
+                localStorage.removeItem('alertInfo');
+              }
+            });
+          </script>
           
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
