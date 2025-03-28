@@ -1,4 +1,4 @@
 https://github.com/Tencobijemuchy/Hubacka2022
 
-Final commit : no.24 
-Commit name : Phase 1 final
+Final commit : no.26 
+Commit name : Phase 1 final fix
