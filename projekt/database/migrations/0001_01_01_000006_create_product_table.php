@@ -28,7 +28,7 @@ return new class extends Migration {
 
             $table->foreign('manufacturer_id')
                 ->references('id')->on('manufacturers')
-                ->onDelete('cascade'); // voliteľne môžeš zmeniť aj na set null
+                ->onDelete('cascade');
         });
     }
 

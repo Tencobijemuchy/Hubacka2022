@@ -12,7 +12,7 @@ class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('auth.register'); // Tvoja registračná Blade šablóna
+        return view('auth.register');
     }
 
     public function register(Request $request)

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ProductController;
 
 Route::get('/', function () {
     return view('index');
@@ -12,13 +13,11 @@ Route::get('/shopping-cart', function () {
     return view('ShoppingCart');
 })->name('shoppingCart');
 
-Route::get('/search-filter', function () {
-    return view('searchFilter');
-})->name('searchFilter');
+Route::get('/order-details', function () {
+    return view('order_details');
+})->name('orderDetails');
 
-Route::get('/admin-page', function () {
-    return view('adminPage');
-})->name('adminPage');
+
 
 Route::get('/product-page', function () {
     return view('productPage');
@@ -35,9 +34,24 @@ Route::post('/logout', function () {
 })->name('logout');
 
 
-// Používame kontroléry pre registráciu a prihlasovanie:
+
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
+Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+Route::get('/search-filter/{type?}', [ProductController::class, 'searchFilter'])->name('searchFilter');
+
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+Route::get('/admin-page', [ProductController::class, 'showAdminPage'])->name('adminPage');
+
+Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
+
+Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+
+Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+
+

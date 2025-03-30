@@ -15,7 +15,7 @@
             <div>
             </div>
             <div class="d-flex align-items-center flex-nowrap">
-                <!-- temporary admin access until php login is functional -->
+
 
                 <div class="dropdown">
                     @if(auth()->check())
@@ -61,67 +61,75 @@
     </div>
 
     <!-- quick select -->
+
     <div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">
         <div class="row g-3">
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Luky</a>
+                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter', 1) }}">Luky</a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Kuše</a>
+                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter',2) }}">Kuše</a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Praky</a>
+                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter',3) }}">Praky</a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Príslušenstvo</a>
+                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter',4) }}">Šípy</a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Ostatné</a>
+                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter',5) }}">Príslušenstvo</a>
             </div>
         </div>
     </div>
 
     <!-- Shopping Cart Section -->
-    <div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
+    <div style="background-color: #80a080;" class="container rounded-2 p-4 my-2">
         <h2 class="mb-3">Shopping Cart</h2>
 
         <!--------------------- item in Cart -------------------->
-        @for ($i = 1; $i <= 5; $i++)
-            <div class="row mb-3 p-2 rounded-2" style="background-color: #b9d2b6;">
-                <!-- photo -->
-                <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
-                    <img src="{{ asset('assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp') }}"
-                         class="img-fluid rounded-2 responsive-cart-img" alt="Foto produktu">
-                </div>
+        <div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
 
-                <!-- Specs -->
-                <div class="col-12 col-md-6 mb-3 mb-md-0">
-                    <h5>Product Name {{ $i }}</h5>
-                    <p class="mb-1">Specifications and chosen customizations of selected product.</p>
-                    <p class="mb-1">Orientation: --- | Length: ---" | Draw Weight: --- lbs</p>
-                </div>
+            <!-- photo -->
+            <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
+                <img src="assets/images/bows/lazecky-skaut-padouk-dlouhy-luk-01.webp" class="img-fluid rounded-2 responsive-cart-img" alt="Foto produktu">
+            </div>
 
-                <!-- prices -->
-                <div class="col-12 col-md-4 d-flex flex-column align-items-end">
-                    <!-- Cenové informácie hore -->
-                    <p class="mb-1">Price without DPH: 100.00</p>
-                    <p class="mb-1">Price with DPH: 120.00</p>
 
-                    <!-- buttons -->
-                    <div class="mt-auto d-flex align-items-center gap-2">
-                        <label for="{{ $i }}" class="mb-0">Amount</label>
-                        <input type="number" id="{{ $i }}" class="form-control" style="width:80px;" min="1" value="1">
-                        <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                    </div>
+            <!-- Specs -->
+            <div class="col-12 col-md-6 mb-3 mb-md-0">
+                <h5>Product Name 1</h5>
+                <p class="mb-1">Specifications and chosen customizations of selected product.</p>
+                <p class="mb-1">Orientation: --- | Length: ---" | Draw Weight: --- lbs</p>
+
+            </div>
+
+            <!-- prices -->
+            <div class="col-12 col-md-4 d-flex flex-column align-items-end">
+                <!-- Cenové informácie hore -->
+                <p class="mb-1">Price without DPH: 100.00</p>
+                <p class="mb-1">Price with DPH: 120.00</p>
+
+                <!-- buttons -->
+                <div class="mt-auto d-flex align-items-center gap-2">
+                    <label for="1" class="mb-0">Amount</label>
+                    <input type="number" id="cart_item_amount_picker" class="form-control" style="width:80px;" min="1" value="1">
+                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
-        @endfor
+
+        </div>
+
+
+
+
+
 
         <!-- ORDER NOW a Total Price -->
         <div class="row mt-4 ms-5">
-            <div class="container d-flex align-items-center justify-content-between">
+            <div class="container container d-flex align-items-center justify-content-between">
+
                 <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                    <button class="btn btn-success btn-lg">ORDER NOW</button>
+                    <a class="btn btn-success btn-lg" href="{{ route('orderDetails') }}">Order now</a>
                 </div>
                 <div class="text-md-end">
                     <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: ------</p>
@@ -130,35 +138,10 @@
         </div>
     </div>
 
-    <!-- footer -->
-    <footer class="mt-auto py-4 mt-2" style="background-color: #80a080;">
-        <div class="container">
-            <div class="row text-center text-md-start justify-content-between align-items-center">
-                <!-- Address -->
-                <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center mb-3 mb-md-0">
-                    <i class="bi bi-geo-alt-fill fs-4 me-2"></i>
-                    <div>
-                        <div>Ilkovičova 6276/2</div>
-                        <strong>842 16 Bratislava 4</strong>
-                    </div>
-                </div>
-                <!-- Phone -->
-                <div class="col-12 col-lg-2 col-md-6 d-flex align-items-center mb-3 mb-md-0">
-                    <i class="bi bi-telephone-fill fs-4 me-2"></i>
-                    <div>
-                        <strong>+421 905 194 679</strong>
-                    </div>
-                </div>
-                <!-- Email -->
-                <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center">
-                    <i class="bi bi-envelope-fill fs-4 me-2"></i>
-                    <div>
-                        <a class="text-decoration-none text-dark fw-bold" aria-disabled="true">
-                            <strong>customer_helpline@LukEshop.com</strong>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
+
+
+@endsection
+@section('footer')
+    @include('partials.footer')
 @endsection

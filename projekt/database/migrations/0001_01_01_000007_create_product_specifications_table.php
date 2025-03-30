@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('attribute_id');
-            $table->string('value'); // Uloženie hodnoty atribútu (enum, číslo, alebo text)
+            $table->string('value');
             $table->timestamps();
 
             $table->foreign('product_id')

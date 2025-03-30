@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <main class="flex-fill">
     <!-- navbar with logo and account button, logo -->
     <nav class="navbar navbar-expand-sm navbar-light mb-2" style="background-color: #80a080;">
         <div class="container d-flex align-items-center justify-content-between flex-nowrap">
@@ -64,267 +65,141 @@
     <div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">
         <div class="row g-3">
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Luky</a>
+                <a type="button" class="btn {{ $selectedType == 1 ? 'btn-secondary' : 'btn-light' }} w-100"
+                   href="{{ route('searchFilter', ['type' => 1]) }}">
+                    Luky
+                </a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Kuše</a>
+
+                <a type="button" class="btn {{ $selectedType == 2 ? 'btn-secondary' : 'btn-light' }} w-100"
+                   href="{{ route('searchFilter', 2) }}">
+                    Kuše
+                </a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Praky</a>
+
+                <a type="button" class="btn {{ $selectedType == 3 ? 'btn-secondary' : 'btn-light' }} w-100"
+                   href="{{ route('searchFilter', 3) }}">
+                    Praky
+                </a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Príslušenstvo</a>
+                <a type="button" class="btn {{ $selectedType == 4 ? 'btn-secondary' : 'btn-light' }} w-100"
+                   href="{{ route('searchFilter', 4) }}">
+                    Šípy
+                </a>
             </div>
             <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="{{ route('searchFilter') }}">Ostatné</a>
+                <a type="button" class="btn {{ $selectedType == 5 ? 'btn-secondary' : 'btn-light' }} w-100"
+                   href="{{ route('searchFilter', 5) }}">
+                    Príslušenstvo
+                </a>
             </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- filter and products -->
+    <div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
+
+        <div class="d-flex flex-column flex-md-row align-items-start gap-2">
+
+            <!-- filter -->
+            <div class="col-12 col-md-3 mb-3 mb-md-0 p-3 bg-light rounded-2">
+                <h4>Filter</h4>
+                <hr>
+                <div class="mb-3">
+                    <label for="filter_type" class="form-label">Zoradenie</label>
+                    <select id="filter_type" class="form-select">
+                        <option>Nezadané</option>
+                        <option>Najlacnejšie</option>
+                        <option>Najdrahšie</option>
+                        <option>Najpopulárnejšie</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="filter_manufacturer" class="form-label">Výrobca</label>
+                    <select id="filter_manufacturer" class="form-select">
+                        <option>Všetci</option>
+                        <option>Lazecký</option>
+                        <option>Ragim</option>
+                        <option>Ek Archery</option>
+                        <option>White Feather</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="filter_type" class="form-label">Typ luku</label>
+                    <select id="filter_type" class="form-select">
+                        <option>Všetko</option>
+                        <option>Dlhý luk</option>
+                        <option>Reflexný luk</option>
+                        <option>Compound luk</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="filter_length" class="form-label">Dĺžka</label>
+                    <select id="filter_length" class="form-select">
+                        <option>Všetko</option>
+                        <option>64"</option>
+                        <option>68"</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="filter_weight" class="form-label">Sila (lbs)</label>
+                    <select id="filter_weight" class="form-select">
+                        <option>Všetko</option>
+                        <option>30</option>
+                        <option>35</option>
+                        <option>40</option>
+                        <option>45</option>
+                        <option>50</option>
+                    </select>
+                </div>
+                <button class="btn btn-secondary w-100">Apply Filter</button>
+            </div>
+
+            <!-- product grid -->
+            <div class="col-12 col-md-9">
+                <div id="product-grid" class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3">
+                    @foreach($products as $product)
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="{{ route('products.show', $product->id) }}">
+                                    <img src="{{ asset($product->img1) }}"
+                                         class="card-img-top"
+                                         style="height: 300px; object-fit: cover;"
+                                         alt="{{ $product->name }}">
+                                </a>
+                                <div class="card-body">
+                                    <a href="{{ route('products.show', $product->id) }}" class="text-dark text-decoration-none">
+                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                    </a>
+                                    <p class="card-text">{{ $product->price }}€</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <!-- Pagination links -->
+                <div class="d-flex justify-content-center mt-3">
+                    {{ $products->links() }}
+                </div>
+            </div>
+
+
         </div>
     </div>
 
-<!-- Filter a produkty -->
-<div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
-
-    <div class="d-flex flex-column flex-md-row align-items-start gap-2">
-
-        <!-- Ľavý stĺpec: Filter -->
-        <div class="col-12 col-md-3 mb-3 mb-md-0 p-3 bg-light rounded-2">
-            <h4>Filter</h4>
-            <hr>
-            <div class="mb-3">
-                <label for="filterManufacturer" class="form-label">Výrobca</label>
-                <select id="filterManufacturer" class="form-select">
-                    <option>Všetci</option>
-                    <option>Lazecký</option>
-                    <option>Ragim</option>
-                    <option>Ek Archery</option>
-                    <option>White Feather</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="filterType" class="form-label">Typ luku</label>
-                <select id="filterType" class="form-select">
-                    <option>Všetko</option>
-                    <option>Dlhý luk</option>
-                    <option>Reflexný luk</option>
-                    <option>Compound luk</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="filterLength" class="form-label">Dĺžka</label>
-                <select id="filterLength" class="form-select">
-                    <option>Všetko</option>
-                    <option>64"</option>
-                    <option>68"</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="filterWeight" class="form-label">Sila (lbs)</label>
-                <select id="filterWeight" class="form-select">
-                    <option>Všetko</option>
-                    <option>30</option>
-                    <option>35</option>
-                    <option>40</option>
-                    <option>45</option>
-                    <option>50</option>
-                </select>
-            </div>
-            <button class="btn btn-light w-100">Apply Filter</button>
-        </div>
-
-        <!-- Pravý stĺpec: Grid produktov -->
-        <div class="col-12 col-md-9">
-            <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3">
-
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                        class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 1</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 2</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 3</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 1</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 2</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 3</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 1</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 2</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 3</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 1</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 2</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="{{ route('productPage') }}"><img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp"
-                                                                  class="card-img-top" alt="Product Image"></a>
-                        <div class="card-body">
-                            <a href="{{ route('productPage') }}" class="text-dark text-decoration-none">
-                                <h5 class="card-title">Product 3</h5>
-                            </a>
-                            <p class="card-text">Short description.</p>
-                        </div>
-                    </div>
-                </div>
+</main>
 
 
 
 
 
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- footer -->
-<footer class="mt-auto py-4" style="background-color: #80a080;">
-    <div class="container">
-        <div class="row text-center text-md-start justify-content-between align-items-center">
-
-            <!-- Address -->
-            <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center mb-3 mb-md-0">
-                <i class="bi bi-geo-alt-fill fs-4 me-2"></i>
-                <div>
-                    <div>Ilkovičova 6276/2</div>
-                    <strong>842 16 Bratislava 4</strong>
-                </div>
-            </div>
-
-            <!-- Phone -->
-            <div class="col-12 col-lg-2 col-md-6 d-flex align-items-center mb-3 mb-md-0">
-                <i class="bi bi-telephone-fill fs-4 me-2"></i>
-                <div>
-                    <strong>+421 905 194 679 </strong>
-                </div>
-            </div>
-
-            <!-- Email -->
-            <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center">
-                <i class="bi bi-envelope-fill fs-4 me-2"></i>
-                <div>
-                    <a class="text-decoration-none text-dark fw-bold" aria-disabled="true"><strong>customer_helpline@LukEshop.com</strong></a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</footer>
-
-
+@endsection
+@section('footer')
+    @include('partials.footer')
 @endsection
