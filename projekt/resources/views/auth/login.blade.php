@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Login - LukEshop')
-
 @section('content')
-    <body class="d-flex justify-content-center align-items-center vh-100" style="background-color: #B7C9B2;">
+    <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #B7C9B2;">
         <div class="container">
             <div class="row" style="height: 700px;">
                 <!-- Login sekcia -->
                 <div class="col-md-8 p-5 d-flex flex-column justify-content-center align-items-center bg-secondary-subtle rounded-2 shadow position-relative">
                     <!-- Close Button -->
-                    <div class="position-absolute absolute top-0 start-0 p-2">
-                        <a type="button" class="btn btn-close btn-lg" aria-label="Close" href="{{ route('index') }}"></a>
+                    <div class="position-absolute top-0 start-0 p-2">
+                        <a class="btn btn-close btn-lg" aria-label="Close" href="{{ route('index') }}"></a>
                     </div>
 
                     <div class="mb-5">
@@ -50,7 +48,7 @@
                     </form>
                 </div>
 
-                <!-- Register sekcia (zobrazuje sa na väčších obrazovkách) -->
+
                 <div class="col-md-4 p-5 bg-secondary d-flex flex-column justify-content-center align-items-center text-dark text-center rounded-2 shadow d-none d-md-flex">
                     <div>
                         <p class="mb-1 fs-4">Don't have an account?</p>
@@ -60,5 +58,5 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
 @endsection
