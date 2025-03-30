@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Luky E-S - Shopping Cart</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="assets/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body style="background-color: #B7C9B2;">
+
+<!-- navbar with logo and account button, logo -->
+<nav class="navbar navbar-expand-sm navbar-light mb-2" style="background-color: #80a080;">
+  <div class="container d-flex align-items-center justify-content-between flex-nowrap">
+    <div class="d-flex align-items-center flex-nowrap">
+      <a href="index.html" class="me-3">
+        <img class="img-fluid" style="width:60px;" src="assets/images/logo.svg" alt="logo">
+      </a>
+      <h1 class="mb-0 fs-4"><a href="index.html" class="text-dark text-decoration-none">LukEshop</a></h1>
+    </div>
+    <div class="d-flex align-items-center flex-nowrap">
+      <a type="button" class="btn btn-secondary me-3 px-4" href="login_page.html">Account</a>
+      <h1 class="ms-3"><a href="login_page.html" class="text-dark"><i class="bi bi-person-lock"></i></a></h1>
+    </div>
+  </div>
+</nav>
+
+
+<!-- search box and shoping cart icon -->
+<div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
+  <div class="flex-grow-1 d-flex justify-content-center ps-5">
+    <div class="py-2" style="width: 60%;">
+      <input type="text" class="form-control col-8 col-sm-12 " placeholder="Search box" />
+    </div>
+  </div>
+  <div>
+    <h2 class="mb-0 px-1"><a href="ShoppingCart.html" class="text-dark"><i class="bi bi-bag-fill"></i></a></h2>
+  </div>
+</div>
+
+<!-- quick select -->
+<div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">
+  <div class="row g-3">
+    <div class="col-6 col-md">
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">Luky</a>
+    </div>
+    <div class="col-6 col-md">
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">Kuše</a>
+    </div>
+    <div class="col-6 col-md">
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">Praky</a>
+    </div>
+    <div class="col-6 col-md">
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">Šípy</a>
+    </div>
+    <div class="col-6 col-md">
+      <a type="button" class="btn btn-light w-100" href="searchFilter.html">Príslušenstvo</a>
+    </div>
+  </div>
+</div>
+
+<!-- Shopping Cart Section -->
+<div style="background-color: #80a080;" class="container rounded-2 p-4 my-2">
+  <h2 class="mb-3">Shopping Cart</h2>
+
+  <!-- Shopping cart item -->
+  <div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
+    <div class="col-12 col-md-2 text-center mb-3 mb-md-0 bg-light rounded-2">
+      <img src="assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp" class="img-fluid responsive-cart-img2" alt="Skaut Padouk">
+  </div>
+  
+  <div class="col-12 col-md-6 mb-3 mb-md-0">
+    <h5>Skaut Padouk</h5>
+    <p class="mb-1">Specifications and chosen customizations of selected product.</p>
+    <p class="mb-1">Orientation: Right-handed | Length: 68" | Draw Weight: 30-50 lbs</p>
+  </div>
+
+  <div class="col-12 col-md-4 d-flex flex-column align-items-end">
+    <p class="mb-1">Price without DPH: 182,07€</p>
+    <p class="mb-1">Price with DPH: 218,49€</p>
+    <div class="mt-auto d-flex align-items-center gap-2">
+      <label for="1" class="mb-0">Amount</label>
+      <input type="number" id="cart_item_amount_picker" class="form-control" style="width:80px;" min="1" value="1">
+      <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Shopping cart item -->
+<div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
+  <div class="col-12 col-md-2 text-center mb-3 mb-md-0 bg-light rounded-2">
+    <img src="assets/images/cobra/cobrat250.png" class="img-fluid responsive-cart-img2" alt="Cobra">
+  </div>
+
+  <div class="col-12 col-md-6 mb-3 mb-md-0">
+    <h5>Cobra</h5>
+    <p class="mb-1">Specifications and chosen customizations of selected product.</p>
+    <p class="mb-1">Orientation: Ambidextrous | Length: 60" | Draw Weight: 25-45 lbs</p>
+  </div>
+
+  <div class="col-12 col-md-4 d-flex flex-column align-items-end">
+    <p class="mb-1">Price without DPH: 247,29€</p>
+    <p class="mb-1">Price with DPH: 296,75€</p>
+    <div class="mt-auto d-flex align-items-center gap-2">
+      <label for="1" class="mb-0">Amount</label>
+      <input type="number" id="cart_item_amount_picker" class="form-control" style="width:80px;" min="1" value="1">
+      <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Shopping cart item -->
+<div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
+  <div class="col-12 col-md-2 text-center mb-3 mb-md-0 bg-light rounded-2">
+    <img src="assets/images/falcon/products_falcon.png" class="img-fluid responsive-cart-img2" alt="Falcon">
+  </div>
+
+    <div class="col-12 col-md-6 mb-3 mb-md-0">
+    <h5>Falcon</h5>
+    <p class="mb-1">Specifications and chosen customizations of selected product.</p>
+    <p class="mb-1">Orientation: Left-handed | Length: 64" | Draw Weight: 35-55 lbs</p>
+  </div>
+
+  
+  <div class="col-12 col-md-4 d-flex flex-column align-items-end">
+    <p class="mb-1">Price without DPH: 188,46€</p>
+    <p class="mb-1">Price with DPH: 226,15€</p>
+    <div class="mt-auto d-flex align-items-center gap-2">
+      <label for="1" class="mb-0">Amount</label>
+      <input type="number" id="cart_item_amount_picker" class="form-control" style="width:80px;" min="1" value="1">
+      <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- ORDER NOW a Total Price -->
+  <div class="row mt-4 ms-5">
+    <div class="container container d-flex align-items-center justify-content-between">
+
+      <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <a class="btn btn-success btn-lg" href="order_details.html">Order now</a>
+      </div>
+      <div class="text-md-end">
+        <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: ------</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- footer -->
+<footer class="mt-auto py-4 mt-2" style="background-color: #80a080;">
+  <div class="container">
+    <div class="row text-center text-md-start justify-content-between align-items-center">
+      
+      <!-- Address -->
+      <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+        <i class="bi bi-geo-alt-fill fs-4 me-2"></i>
+        <div>
+          <div>Ilkovičova 6276/2</div>
+          <strong>842 16 Bratislava 4</strong>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="col-12 col-lg-2 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+        <i class="bi bi-telephone-fill fs-4 me-2"></i>
+        <div>
+          <strong>+421 905 194 679 </strong>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center">
+        <i class="bi bi-envelope-fill fs-4 me-2"></i>
+        <div>
+          <a class="text-decoration-none text-dark fw-bold" aria-disabled="true"><strong>customer_helpline@LukEshop.com</strong></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
