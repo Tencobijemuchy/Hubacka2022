@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1) CHOOSE PRODUCT => open Add Product modal
+
     var chooseBtn = document.getElementById('chooseProductBtn');
     chooseBtn.addEventListener('click', function() {
         var productType = document.getElementById('product_type').value;
@@ -9,36 +9,32 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Zavrieme ChooseProduct modal
+
         var chooseModalEl = document.getElementById('modalChooseProduct');
         var chooseModal = bootstrap.Modal.getInstance(chooseModalEl);
         if (chooseModal) {
             chooseModal.hide();
         }
 
-        // Nastavíme product_type_id
+
         document.getElementById('product_type_id').value = productType;
-        // Zobraz/skry polia
+
         showHideFields(productType);
 
-        // Otvoríme modalAddProduct
+
         var addModalEl = document.getElementById('modalAddProduct');
         var addModal = new bootstrap.Modal(addModalEl);
         addModal.show();
     });
 
-    // 2) showHideFields => zobraz/skry polia (bow_length, orientation, draw_weight)
+
     function showHideFields(productType) {
         // Najprv všetko skryjeme
         document.getElementById('field_bow_length').classList.add('d-none');
         document.getElementById('field_draw_weight').classList.add('d-none');
         document.getElementById('field_orientation').classList.add('d-none');
 
-        // Luk => 1 => bow_length, draw_weight, orientation
-        // Kuša => 2 => draw_weight
-        // Prak => 3 => ...
-        // Šíp => 4 => ...
-        // Ostatné => 5 => ...
+
         switch(productType) {
             case '1':
                 document.getElementById('field_bow_length').classList.remove('d-none');
@@ -48,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             case '2':
                 document.getElementById('field_draw_weight').classList.remove('d-none');
                 break;
-            // atď.
+
         }
     }
 
-    // 3) Dynamické polia (bowLengths, drawWeights, orientations)
+
     var bowLengths = [];
     var drawWeights = [];
     var orientations = [];
@@ -67,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             orientations.length ? 'Orientations: ' + orientations.join(', ') : '';
     }
 
-    // Add bow length
+
     document.getElementById('addBowLengthButton').addEventListener('click', function() {
         var input = document.getElementById('bow_length_input');
         var val = input.value.trim();
@@ -84,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add draw weight
+
     document.getElementById('addDrawWeightButton').addEventListener('click', function() {
         var input = document.getElementById('draw_weight_input');
         var val = input.value.trim();
@@ -101,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add orientation
+
     document.getElementById('addOrientationButton').addEventListener('click', function() {
         var select = document.getElementById('orientation_select');
         var val = select.value;
@@ -117,10 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 4) Tlačidlo CONFIRM => skontroluje aspoň 2 fotky => submit
+
     var confirmButton = document.getElementById('confirmButton');
     confirmButton.addEventListener('click', function() {
-        // Minimálna kontrola
+
         var p1 = document.getElementById('Photo1').files;
         var p2 = document.getElementById('Photo2').files;
         if (!p1.length || !p2.length) {
@@ -130,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addProductForm.submit();
     });
 
-    // 5) Discard => reset
+
     var discardBtn = document.getElementById('discardButton');
     discardBtn.addEventListener('click', function() {
         addProductForm.reset();
@@ -140,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateListsDisplay();
     });
 
-    // 6) DELETE modal => vyplní action pre destroy
+
     var modalDelete = document.getElementById('modalDelete');
     modalDelete.addEventListener('show.bs.modal', function(event) {
         var button = event.relatedTarget;
@@ -159,9 +155,9 @@ document.addEventListener('DOMContentLoaded', function() {
         form.action = '/admin/products/' + productId;
     });
 
-    // 7) EDIT modal => vyplní formulár pre update
+
     var editModal = document.getElementById('modalModify');
-    editModal.addEventListener('show.bs.modal', function(event) {
+    editModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var productId = button.getAttribute('data-product-id');
         var productName = button.getAttribute('data-product-name');
@@ -177,15 +173,22 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('edit_description').value = productDescription;
         document.getElementById('edit_price').value = productPrice;
 
-        // existujúce obrázky
         var container = document.getElementById('existingImagesContainer');
         container.innerHTML = '';
 
-        productImages.forEach(function(imgSrc, index) {
+        productImages.forEach(function (imgSrc, index) {
+            var slotNumber = index + 1;
+
+            var wrapper = document.createElement('div');
+            wrapper.className = 'd-flex flex-column align-items-center mb-3';
+
+
+            var label = document.createElement('div');
+            label.className = 'fw-bold mb-1';
+            label.textContent = 'IMG' + slotNumber;
+            wrapper.appendChild(label);
+
             if (imgSrc) {
-                var slotNumber = index + 1; // 1..4
-                var wrapper = document.createElement('div');
-                wrapper.className = 'd-flex flex-column align-items-center';
 
                 var imageEl = document.createElement('img');
                 imageEl.src = imgSrc;
@@ -211,9 +214,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 wrapper.appendChild(imageEl);
                 wrapper.appendChild(removeWrapper);
-                container.appendChild(wrapper);
+
+
+            } else {
+
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.name = 'img' + slotNumber;
+                input.className = 'form-control';
+                wrapper.appendChild(input);
             }
+
+            container.appendChild(wrapper);
         });
     });
+
+
+
 
 });

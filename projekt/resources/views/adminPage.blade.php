@@ -296,31 +296,19 @@
                             <input type="number" class="form-control" name="price" id="edit_price" step="0.01" required>
                         </div>
 
-                        <!-- PRODUCT EXISTING IMGS NA VYMAZANIE -->
+                        <!-- EXISTING IMAGES SECTION -->
                         <div class="mb-3">
-                            <label class="form-label">Existing Images</label>
-                            <div class="d-flex flex-wrap gap-2" id="existingImagesContainer">
+                            <label class="form-label">EXISTING IMAGES</label>
+                            <div class="d-flex flex-wrap gap-4" id="existingImagesContainer">
                                 <!-- doplnene v adminPageScripts -->
                             </div>
                         </div>
 
-                        <!-- NEW IMGS -->
-                        <div class="mb-3">
-                            <label for="edit_img1" class="form-label">Photo1</label>
-                            <input type="file" class="form-control" name="img1" id="edit_img1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_img2" class="form-label">Photo2</label>
-                            <input type="file" class="form-control" name="img2" id="edit_img2">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_img3" class="form-label">Photo3</label>
-                            <input type="file" class="form-control" name="img3" id="edit_img3">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_img4" class="form-label">Photo4</label>
-                            <input type="file" class="form-control" name="img4" id="edit_img4">
-                        </div>
+
+                        <div class="my-4 border-top"></div>
+
+
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
