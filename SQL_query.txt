@@ -1,0 +1,27 @@
+INSERT INTO product_types (id, type_name, created_at, updated_at)
+VALUES
+(1, 'Bow', NOW(), NOW()),
+(2, 'Crossbow', NOW(), NOW()),
+(3, 'Sling', NOW(), NOW()),
+(4, 'Arrow', NOW(), NOW()),
+(5, 'Other', NOW(), NOW());
+
+INSERT INTO product_attributes (id, product_type_id, name, data_type, created_at, updated_at)
+VALUES 
+  (1, 1, 'bow_length', 'number', NOW(), NOW()),
+  (2, 1, 'draw_weight', 'number', NOW(), NOW()),
+  (3, 1, 'orientation', 'enum', NOW(), NOW());
+
+
+INSERT INTO manufacturers (name) VALUES 
+('EK Archery'),
+('Ragim'),
+('Lazecký'),
+('White Feather'),
+('Black Hawk');
+
+INSERT INTO users (id, username, email, password, created_at, updated_at)
+VALUES 
+  (1, 'admin', 'admin@LukEshop.com', 'adminadmin', NOW(), NOW()),
+  (2, 'Tencobijemuchy', 'pasteka.a@gmail.com', 'a', NOW(), NOW());
+  
