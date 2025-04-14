@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function showHideFields(productType) {
-        // Najprv všetko skryjeme
+        
         document.getElementById('field_bow_length').classList.add('d-none');
         document.getElementById('field_draw_weight').classList.add('d-none');
         document.getElementById('field_orientation').classList.add('d-none');
