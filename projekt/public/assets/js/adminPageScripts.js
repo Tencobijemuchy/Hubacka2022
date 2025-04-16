@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('field_bow_length').classList.add('d-none');
         document.getElementById('field_draw_weight').classList.add('d-none');
         document.getElementById('field_orientation').classList.add('d-none');
+        document.getElementById('field_crossbow_draw_weight').classList.add('d-none');
+        document.getElementById('field_sling_shot_rubber_width').classList.add('d-none');
+        document.getElementById('field_arrow_length').classList.add('d-none');
+        document.getElementById('field_arrow_diameter').classList.add('d-none');
 
 
         switch(productType) {
@@ -42,7 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('field_orientation').classList.remove('d-none');
                 break;
             case '2':
-                document.getElementById('field_draw_weight').classList.remove('d-none');
+                document.getElementById('field_crossbow_draw_weight').classList.remove('d-none');
+                break;
+            case '3':
+                document.getElementById('field_sling_shot_rubber_width').classList.remove('d-none');
+                break;
+                case '4':
+                document.getElementById('field_arrow_length').classList.remove('d-none');
+                document.getElementById('field_arrow_diameter').classList.remove('d-none');
+                break;
+            case '5':
                 break;
 
         }
@@ -52,6 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var bowLengths = [];
     var drawWeights = [];
     var orientations = [];
+    var crossbow_draw_weight_list = [];
+    var sling_shot_rubber_width_list = [];
+    var arrow_length_list = [];
+    var arrow_diameter_list = [];
     var addProductForm = document.getElementById('addProductForm');
 
     function updateListsDisplay() {
@@ -61,6 +78,14 @@ document.addEventListener('DOMContentLoaded', function() {
             drawWeights.length ? 'Draw weights: ' + drawWeights.join(', ') : '';
         document.getElementById('orientationList').textContent =
             orientations.length ? 'Orientations: ' + orientations.join(', ') : '';
+        document.getElementById('crossbowDrawWeightList').textContent =
+            crossbow_draw_weight_list.length ? 'Draw weights: ' + crossbow_draw_weight_list.join(', ') : '';
+        document.getElementById('sling_shot_rubber_width_List').textContent =
+            sling_shot_rubber_width_list.length ? 'Rubber widths: ' + sling_shot_rubber_width_list.join(', ') : '';
+        document.getElementById('arrow_length_List').textContent =
+            arrow_length_list.length ? 'Arrow lengths : ' + arrow_length_list.join(', ') : '';
+        document.getElementById('arrow_diameter_List').textContent =
+            arrow_diameter_list.length ? 'Arrow diameters: ' + arrow_diameter_list.join(', ') : '';
     }
 
 
@@ -96,18 +121,103 @@ document.addEventListener('DOMContentLoaded', function() {
             addProductForm.appendChild(hidden);
         }
     });
-
-
+    
+    
     document.getElementById('addOrientationButton').addEventListener('click', function() {
         var select = document.getElementById('orientation_select');
         var val = select.value;
         if (val && !orientations.includes(val)) {
             orientations.push(val);
             updateListsDisplay();
-
+            
             var hidden = document.createElement('input');
             hidden.type = 'hidden';
             hidden.name = 'orientation[]';
+            hidden.value = val;
+            addProductForm.appendChild(hidden);
+        }
+    });
+    
+    
+    document.getElementById('addCrossbowDrawWeightButton').addEventListener('click', function() {
+        var input = document.getElementById('crossbow_draw_weight_input');
+        var val = input.value.trim();
+        if (val) {
+            crossbow_draw_weight_list.push(val);
+            input.value = '';
+            updateListsDisplay();
+
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'crossbow_draw_weight[]';
+            hidden.value = val;
+            addProductForm.appendChild(hidden);
+        }
+    });
+
+
+    document.getElementById('addCrossbowDrawWeightButton').addEventListener('click', function() {
+        var input = document.getElementById('crossbow_draw_weight_input');
+        var val = input.value.trim();
+        if (val) {
+            crossbow_draw_weight_list.push(val);
+            input.value = '';
+            updateListsDisplay();
+            
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'crossbow_draw_weight[]';
+            hidden.value = val;
+            addProductForm.appendChild(hidden);
+        }
+    });
+    
+
+    document.getElementById('add_sling_shot_rubber_widthButton').addEventListener('click', function() {
+        var input = document.getElementById('sling_shot_rubber_width_input');
+        var val = input.value.trim();
+        if (val) {
+            sling_shot_rubber_width_list.push(val);
+            input.value = '';
+            updateListsDisplay();
+
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'slingshot_rubber_width[]';
+            hidden.value = val;
+            addProductForm.appendChild(hidden);
+        }
+    });
+
+
+    document.getElementById('add_arrow_lengthButton').addEventListener('click', function() {
+        var input = document.getElementById('arrow_length_input');
+        var val = input.value.trim();
+        if (val) {
+            arrow_length_list.push(val);
+            input.value = '';
+            updateListsDisplay();
+
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'arrow_length[]';
+            hidden.value = val;
+            addProductForm.appendChild(hidden);
+        }
+    });
+
+
+    document.getElementById('add_arrow_diameterButton').addEventListener('click', function() {
+        var input = document.getElementById('arrow_diameter_input');
+        var val = input.value.trim();
+        if (val) {
+            arrow_diameter_list.push(val);
+            input.value = '';
+            updateListsDisplay();
+
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'arrow_diameter[]';
             hidden.value = val;
             addProductForm.appendChild(hidden);
         }

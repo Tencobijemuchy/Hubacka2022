@@ -14,33 +14,33 @@
             <h1 class="pe-5 text-white">Admin</h1>
             <div></div>
             <div class="d-flex align-items-center flex-nowrap">
-                <a type="button" class="btn btn-danger d-flex align-items-center" href="index.html">
+                <a type="button" class="btn btn-danger d-flex align-items-center" href="{{ route('index') }}">
                     <i class="bi bi-person-dash fs-4 me-2"></i>Log out
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- quick select -->
-    <div class="container rounded-2 p-3 mt-2 shadow bg-dark mb-2">
-        <div class="row g-3">
-            <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="#">Luky</a>
-            </div>
-            <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="#">Kuše</a>
-            </div>
-            <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="#">Praky</a>
-            </div>
-            <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="#">Šípy</a>
-            </div>
-            <div class="col-6 col-md">
-                <a type="button" class="btn btn-light w-100" href="#">Príslušenstvo</a>
-            </div>
-        </div>
+  <!-- quick select -->
+  <div class="container rounded-2 p-3 my-2 shadow bg-dark">
+    <div class="row g-3">
+      <div class="col-6 col-md">
+          <a type="button" class="btn {{ $type == 1 ? 'btn-secondary' : 'btn-light' }} w-100" href="{{ route('adminPage',1) }}">Luky</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn {{ $type == 2 ? 'btn-secondary' : 'btn-light' }} w-100" href="{{ route('adminPage',2) }}">Kuše</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn {{ $type == 3 ? 'btn-secondary' : 'btn-light' }} w-100" href="{{ route('adminPage',3) }}">Praky</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn {{ $type == 4 ? 'btn-secondary' : 'btn-light' }} w-100" href="{{ route('adminPage',4) }}">Šípy</a>
+      </div>
+      <div class="col-6 col-md">
+        <a type="button" class="btn {{ $type == 5 ? 'btn-secondary' : 'btn-light' }} w-100" href="{{ route('adminPage',5) }}">Príslušenstvo</a>
+      </div>
     </div>
+  </div>
 
     <div class="container d-flex justify-content-center">
         <div class="btn btn-danger fs-5 px-3 mb-2" type="button" data-bs-toggle="modal" data-bs-target="#modalChooseProduct">
@@ -197,7 +197,7 @@
 
 
 
-                        <!-- BOW / CROSSBOW -> BOW_LENGTH -->
+                        <!-- BOW_LENGTH -->
                         <div class="mb-3 d-none" id="field_bow_length">
                             <label class="form-label">Bow length</label>
                             <div class="input-group">
@@ -208,7 +208,7 @@
                         </div>
 
 
-                        <!-- DRAW_WEIGHT -->
+                        <!-- DRAW_WEIGHT BOW -->
                         <div class="mb-3 d-none" id="field_draw_weight">
                             <label class="form-label">Draw weight</label>
                             <div class="input-group">
@@ -217,6 +217,7 @@
                             </div>
                             <small id="drawWeightList" class="text-muted"></small>
                         </div>
+
 
 
                         <!-- ORIENTATION -->
@@ -233,6 +234,54 @@
                             </div>
                             <small id="orientationList" class="text-muted"></small>
                         </div>
+
+                        <!-- DRAW_WEIGHT CROSSBOW -->
+                        <div class="mb-3 d-none" id="field_crossbow_draw_weight">
+                            <label class="form-label">Draw weight</label>
+                            <div class="input-group">
+                                <input type="text" id="crossbow_draw_weight_input" class="form-control" placeholder="Enter draw weight">
+                                <button type="button" id="addCrossbowDrawWeightButton" class="btn btn-outline-secondary">Add</button>
+                            </div>
+                            <small id="crossbowDrawWeightList" class="text-muted"></small>
+                        </div>
+
+
+                        <!-- SLINGSHOT RUBBER WIDTH -->
+                        <div class="mb-3 d-none" id="field_sling_shot_rubber_width">
+                            <label class="form-label">Rubber Width</label>
+                            <div class="input-group">
+                                <input type="text" id="sling_shot_rubber_width_input" class="form-control" placeholder="Enter Rubber Width">
+                                <button type="button" id="add_sling_shot_rubber_widthButton" class="btn btn-outline-secondary">Add</button>
+                            </div>
+                            <small id="sling_shot_rubber_width_List" class="text-muted"></small>
+                        </div>
+
+
+
+
+                        <!-- ARROW LENGTH -->
+                        <div class="mb-3 d-none" id="field_arrow_length">
+                            <label class="form-label">Arrow Length</label>
+                            <div class="input-group">
+                                <input type="text" id="arrow_length_input" class="form-control" placeholder="Enter Arrow Length">
+                                <button type="button" id="add_arrow_lengthButton" class="btn btn-outline-secondary">Add</button>
+                            </div>
+                            <small id="arrow_length_List" class="text-muted"></small>
+                        </div>
+
+                        <!-- ARROW DIAMETER -->
+                        <div class="mb-3 d-none" id="field_arrow_diameter">
+                            <label class="form-label">Arrow Diameter</label>
+                            <div class="input-group">
+                                <input type="text" id="arrow_diameter_input" class="form-control" placeholder="Enter Arrow Diameter">
+                                <button type="button" id="add_arrow_diameterButton" class="btn btn-outline-secondary">Add</button>
+                            </div>
+                            <small id="arrow_diameter_List" class="text-muted"></small>
+                        </div>
+
+
+
+
 
                         <!-- Photo1 - Photo4 -->
                         <div class="mb-3">

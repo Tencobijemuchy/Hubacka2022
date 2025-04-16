@@ -111,13 +111,29 @@
             <div class="col-12 col-md-3 mb-3 mb-md-0 p-3 bg-light rounded-2">
                 <h4>Filter</h4>
                 <hr>
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <label for="price_range" class="form-label fw-bold">Cena</label>
+                    <input type="number" 
+                            name="price_min" 
+                            class="form-control" 
+                            placeholder="Min" 
+                            value="{{ request('price_min') }}" 
+                            min="0">
+                    <span class="fw-bold">–</span>
+                    <input type="number" 
+                            name="price_max" 
+                            class="form-control" 
+                            placeholder="Max" 
+                            value="{{ request('price_max') }}" 
+                            min="0">
+                </div>
                 <div class="mb-3">
-                    <label for="filter_type" class="form-label">Zoradenie</label>
-                    <select id="filter_type" class="form-select">
+                    <label for="filter_sort" class="form-label">Zoradenie</label>
+                    <select id="filter_sort" class="form-select">
                         <option>Nezadané</option>
                         <option>Najlacnejšie</option>
                         <option>Najdrahšie</option>
-                        <option>Najpopulárnejšie</option>
+                        <option>Najpopulárnejšie</option>  
                     </select>
                 </div>
                 <div class="mb-3">
@@ -134,7 +150,7 @@
                     <label for="filter_type" class="form-label">Typ luku</label>
                     <select id="filter_type" class="form-select">
                         <option>Všetko</option>
-                        <option>Dlhý luk</option>
+                        <option>Dlhý luk</option>  
                         <option>Reflexný luk</option>
                         <option>Compound luk</option>
                     </select>

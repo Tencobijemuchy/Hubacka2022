@@ -46,7 +46,7 @@ Route::get('/search-filter/{type?}', [ProductController::class, 'searchFilter'])
 
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
-Route::get('/admin-page', [ProductController::class, 'showAdminPage'])->name('adminPage');
+Route::get('/admin-page{type?}', [ProductController::class, 'showAdminPage'])->name('adminPage');
 
 Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
 

@@ -34,6 +34,17 @@ class ProductController extends Controller
                 'orientation'      => 'nullable|array',
                 'orientation.*'    => 'nullable|string|in:left,right,universal',
 
+                'crossbow_draw_weight'   => 'nullable|array',
+                'crossbow_draw_weight.*' => 'nullable|numeric',
+                
+                'slingshot_rubber_width'   => 'nullable|array',
+                'slingshot_rubber_width.*' => 'nullable|numeric',
+
+                'arrow_length'     => 'nullable|array',
+                'arrow_length.*'   => 'nullable|numeric',
+                'arrow_diameter'   => 'nullable|array',
+                'arrow_diameter.*' => 'nullable|numeric',
+
 
                 'img1' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                 'img2' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -157,10 +168,10 @@ class ProductController extends Controller
 
             } elseif ($product->product_type_id == 2) {// crossbow
 
-                $drawWeightAttrId = 2;
+                $drawWeightAttrId = 4;
 
-                if (isset($validated['draw_weight'])) {
-                    foreach ($validated['draw_weight'] as $val) {
+                if (isset($validated['crossbow_draw_weight'])) {
+                    foreach ($validated['crossbow_draw_weight'] as $val) {
                         if (!empty($val)) {
                             $specRows[] = [
                                 'product_id'   => $product->id,
@@ -174,12 +185,56 @@ class ProductController extends Controller
                 }
             }
             elseif ($product->product_type_id == 3) {// slings
-
-
+                
+                $rubberWidthAttrId = 5;
+    
+                if (isset($validated['slingshot_rubber_width'])) {
+                    foreach ($validated['slingshot_rubber_width'] as $val) {
+                        if (!empty($val)) {
+                            $specRows[] = [
+                                'product_id'   => $product->id,
+                                'attribute_id' => $rubberWidthAttrId,
+                                'value'        => $val,
+                                'created_at'   => now(),
+                                'updated_at'   => now(),
+                            ];
+                        }
+                    }
+                }
+                
             }
             elseif ($product->product_type_id == 4) {// arrows
-
-
+                
+                $arrowLengthAttrId = 6;
+                $arrowDiameterAttrId = 7;
+    
+                if (isset($validated['arrow_length'])) {
+                    foreach ($validated['arrow_length'] as $val) {
+                        if (!empty($val)) {
+                            $specRows[] = [
+                                'product_id'   => $product->id,
+                                'attribute_id' => $arrowLengthAttrId,
+                                'value'        => $val,
+                                'created_at'   => now(),
+                                'updated_at'   => now(),
+                            ];
+                        }
+                    }
+                }
+                if (isset($validated['arrow_diameter'])) {
+                    foreach ($validated['arrow_diameter'] as $val) {
+                        if (!empty($val)) {
+                            $specRows[] = [
+                                'product_id'   => $product->id,
+                                'attribute_id' => $arrowDiameterAttrId,
+                                'value'        => $val,
+                                'created_at'   => now(),
+                                'updated_at'   => now(),
+                            ];
+                        }
+                    }
+                }
+                
             }
             elseif ($product->product_type_id == 5) {// other
 
@@ -295,11 +350,15 @@ class ProductController extends Controller
     }
 
 
-    public function showAdminPage()
+    public function showAdminPage($type = null)
     {
-        $products = Product::paginate(6);
+        $query = Product::query();
+        if ($type !== null) {
+            $query->where('product_type_id', $type);
+        }
+        $products = $query->get(); 
         $manufacturers = Manufacturer::all();
-        return view('adminPage', compact('products','manufacturers'));
+        return view('adminPage', compact('products', 'manufacturers', 'type'));
     }
 
 
@@ -311,22 +370,42 @@ class ProductController extends Controller
     }
 
 
-    public function searchFilter($type = null)
+    public function searchFilter(Request $request, $type = null)
     {
-
-
         $query = Product::query();
 
-        if ($type) {
+        // Filter by type from the route (URL)
+        if ($type !== null) {
             $query->where('product_type_id', $type);
         }
 
+        if ($request->filled('manufacturer_id')) {
+            $query->where('manufacturer_id', $request->manufacturer_id);
+        }
 
-        $products = $query->paginate(6);
+        if ($request->filled('price_min')) {
+            $query->where('price', '>=', $request->price_min);
+        }
+
+        if ($request->filled('price_max')) {
+            $query->where('price', '<=', $request->price_max);
+        }
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        $products = $query->paginate(6)->appends($request->query()); // Keep filters in pagination links
+        $manufacturers = Manufacturer::all();
 
         return view('searchFilter', [
             'products' => $products,
-            'selectedType' => $type
+            'selectedType' => $type,
+            'selectedManufacturer' => $request->manufacturer_id,
+            'priceMin' => $request->price_min,
+            'priceMax' => $request->price_max,
+            'searchedName' => $request->name,
+            'manufacturers' => $manufacturers,
         ]);
     }
 
