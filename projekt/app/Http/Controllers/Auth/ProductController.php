@@ -350,10 +350,13 @@ class ProductController extends Controller
     }
 
 
-    public function showAdminPage($type = null)
+    public function showAdminPage(Request $request, $type = null)
     {
         $query = Product::query();
-        if ($type !== null) {
+        if ($request->filled('name')) {
+            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
+            $type = null; 
+        } elseif ($type !== null) {
             $query->where('product_type_id', $type);
         }
         $products = $query->get(); 
@@ -373,40 +376,50 @@ class ProductController extends Controller
     public function searchFilter(Request $request, $type = null)
     {
         $query = Product::query();
-
-        // Filter by type from the route (URL)
+    
+        // If a name is provided, ignore type filtering and search by name
+        if ($request->filled('name')) {
+            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
+            $type = null;
+        }
         if ($type !== null) {
             $query->where('product_type_id', $type);
         }
-
-        if ($request->filled('manufacturer_id')) {
-            $query->where('manufacturer_id', $request->manufacturer_id);
-        }
-
+    
+        // Price range filter
         if ($request->filled('price_min')) {
-            $query->where('price', '>=', $request->price_min);
+            $query->where('price', '>=', $request->input('price_min'));
         }
-
         if ($request->filled('price_max')) {
-            $query->where('price', '<=', $request->price_max);
+            $query->where('price', '<=', $request->input('price_max'));
         }
-
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
+    
+        // Manufacturer filter
+        if ($request->filled('manufacturer')) {
+            $query->where('manufacturer_id', $request->input('manufacturer'));
         }
-
-        $products = $query->paginate(6)->appends($request->query()); // Keep filters in pagination links
+    
+        // Sorting
+        switch ($request->input('sort')) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+        }
+    
+        $products = $query->paginate(6)->appends($request->query());
         $manufacturers = Manufacturer::all();
-
+    
         return view('searchFilter', [
             'products' => $products,
             'selectedType' => $type,
-            'selectedManufacturer' => $request->manufacturer_id,
-            'priceMin' => $request->price_min,
-            'priceMax' => $request->price_max,
             'searchedName' => $request->name,
             'manufacturers' => $manufacturers,
         ]);
     }
+    
+
 
 }

@@ -18,7 +18,7 @@
           <div class="d-flex align-items-center flex-nowrap">
 
 
-              <div class="dropdown">
+            <div class="dropdown">
                   @if(auth()->check())
                       <button class="btn btn-secondary me-3 px-4 dropdown-toggle no-caret" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                           {{ auth()->user()->username }}
@@ -37,29 +37,33 @@
                   @endif
               </div>
               <h1 class="ms-3">
-                  <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
+                @if(auth()->check())
+                    <a href="#" class="text-dark"><i class="bi bi-file-person"></i></a>
+                @else
+                    <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
+                @endif
               </h1>
           </div>
       </div>
   </nav>
 
-  <!-- search box and shopping cart icon -->
-  <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
-    <div class="flex-grow-1 d-flex justify-content-center ps-5">
-      <div class="py-2" style="width: 60%;">
-        <input type="text" class="form-control col-8 col-sm-12" placeholder="Search box" />
-      </div>
-    </div>
-    <div>
-      <h2 class="mb-0 px-1">
-          <a href="{{ route('shoppingCart') }}" class="text-dark">
-              <i class="bi bi-bag-fill"></i>
-          </a>
+    <!-- search box and shopping cart icon -->
+    <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
+        <form action="{{ route('searchFilter') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">
+            <div class="py-2 d-flex w-100" style="max-width: 700px;">
+                <input type="text" name="name" value="{{ request('name') }}" class="form-control me-2" placeholder="Search box" />
+                <button type="submit" class="btn btn-success"><i class="bi bi-search fs-5"></i></button>
+            </div>
+        </form>
 
-        </a>
-      </h2>
+        <div>
+            <h2 class="mb-0 px-1">
+                <a href="{{ route('shoppingCart') }}" class="text-dark">
+                    <i class="bi bi-bag-fill"></i>
+                </a>
+            </h2>
+        </div>
     </div>
-  </div>
 
   <!-- quick select -->
   <div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">

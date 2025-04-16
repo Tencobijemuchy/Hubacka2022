@@ -37,29 +37,34 @@
                     @endif
                 </div>
                 <h1 class="ms-3">
-                    <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
-                </h1>
+                    @if(auth()->check())
+                        <a href="#" class="text-dark"><i class="bi bi-file-person"></i></a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-dark"><i class="bi bi-person-lock"></i></a>
+                    @endif
+              </h1>
             </div>
         </div>
     </nav>
 
     <!-- search box and shopping cart icon -->
     <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
-        <div class="flex-grow-1 d-flex justify-content-center ps-5">
-            <div class="py-2" style="width: 60%;">
-                <input type="text" class="form-control col-8 col-sm-12" placeholder="Search box" />
+        <form action="{{ route('searchFilter') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">
+            <div class="py-2 d-flex w-100" style="max-width: 700px;">
+                <input type="text" name="name" value="{{ request('name') }}" class="form-control me-2" placeholder="Search box" />
+                <button type="submit" class="btn btn-success"><i class="bi bi-search fs-5"></i></button>
             </div>
-        </div>
+        </form>
+
         <div>
             <h2 class="mb-0 px-1">
                 <a href="{{ route('shoppingCart') }}" class="text-dark">
                     <i class="bi bi-bag-fill"></i>
                 </a>
-
-                </a>
             </h2>
         </div>
     </div>
+
 
     <!-- quick select -->
     <div style="background-color: #80a080;" class="container rounded-2 p-3 mt-2 shadow">
@@ -102,112 +107,85 @@
 
 
 
-    <!-- filter and products -->
-    <div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
+ <!-- filter and products -->
+<div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
 
-        <div class="d-flex flex-column flex-md-row align-items-start gap-2">
+    <div class="d-flex flex-column flex-md-row align-items-start gap-2">
 
-            <!-- filter -->
-            <div class="col-12 col-md-3 mb-3 mb-md-0 p-3 bg-light rounded-2">
-                <h4>Filter</h4>
-                <hr>
-                <div class="d-flex align-items-center gap-2 mb-2">
-                    <label for="price_range" class="form-label fw-bold">Cena</label>
-                    <input type="number" 
-                            name="price_min" 
-                            class="form-control" 
-                            placeholder="Min" 
-                            value="{{ request('price_min') }}" 
-                            min="0">
-                    <span class="fw-bold">–</span>
-                    <input type="number" 
-                            name="price_max" 
-                            class="form-control" 
-                            placeholder="Max" 
-                            value="{{ request('price_max') }}" 
-                            min="0">
-                </div>
-                <div class="mb-3">
-                    <label for="filter_sort" class="form-label">Zoradenie</label>
-                    <select id="filter_sort" class="form-select">
-                        <option>Nezadané</option>
-                        <option>Najlacnejšie</option>
-                        <option>Najdrahšie</option>
-                        <option>Najpopulárnejšie</option>  
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="filter_manufacturer" class="form-label">Výrobca</label>
-                    <select id="filter_manufacturer" class="form-select">
-                        <option>Všetci</option>
-                        <option>Lazecký</option>
-                        <option>Ragim</option>
-                        <option>Ek Archery</option>
-                        <option>White Feather</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="filter_type" class="form-label">Typ luku</label>
-                    <select id="filter_type" class="form-select">
-                        <option>Všetko</option>
-                        <option>Dlhý luk</option>  
-                        <option>Reflexný luk</option>
-                        <option>Compound luk</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="filter_length" class="form-label">Dĺžka</label>
-                    <select id="filter_length" class="form-select">
-                        <option>Všetko</option>
-                        <option>64"</option>
-                        <option>68"</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="filter_weight" class="form-label">Sila (lbs)</label>
-                    <select id="filter_weight" class="form-select">
-                        <option>Všetko</option>
-                        <option>30</option>
-                        <option>35</option>
-                        <option>40</option>
-                        <option>45</option>
-                        <option>50</option>
-                    </select>
-                </div>
-                <button class="btn btn-secondary w-100">Apply Filter</button>
+        <!-- filter -->
+        <form action="{{ route('searchFilter', ['type' => $selectedType]) }}" method="GET" class="col-12 col-md-3 mb-3 mb-md-0 p-3 bg-light rounded-2">
+            <h4>Filter</h4>
+            <hr>
+
+            {{-- Price range --}}
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <label for="price_range" class="form-label fw-bold">Cena</label>
+                <input type="number" name="price_min" class="form-control" placeholder="Min" value="{{ request('price_min') }}" min="0">
+                <span class="fw-bold">–</span>
+                <input type="number" name="price_max" class="form-control" placeholder="Max" value="{{ request('price_max') }}" min="0">
             </div>
 
-            <!-- product grid -->
-            <div class="col-12 col-md-9">
-                <div id="product-grid" class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3">
-                    @foreach($products as $product)
-                        <div class="col">
-                            <div class="card h-100">
-                                <a href="{{ route('products.show', $product->id) }}">
-                                    <img src="{{ asset($product->img1) }}"
-                                         class="card-img-top"
-                                         style="height: 300px; object-fit: cover;"
-                                         alt="{{ $product->name }}">
+            {{-- Sorting --}}
+            <div class="mb-3">
+                <label for="filter_sort" class="form-label">Zoradenie</label>
+                <select name="sort" id="filter_sort" class="form-select">
+                    <option value="">Nezadané</option>
+                    <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Najlacnejšie</option>
+                    <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Najdrahšie</option>
+                    <option value="popularity" {{ request('sort') == 'popularity' ? 'selected' : '' }}>Najpopulárnejšie</option>
+                </select>
+            </div>
+
+            {{-- Manufacturer --}}
+            <div class="mb-3">
+                <label for="filter_manufacturer" class="form-label">Výrobca</label>
+                <select name="manufacturer" id="filter_manufacturer" class="form-select">
+                    <option value="">Všetci</option>
+                    @foreach($manufacturers as $manufacturer)
+                        <option value="{{ $manufacturer->id }}" {{ request('manufacturer') == $manufacturer->id ? 'selected' : '' }}>
+                            {{ $manufacturer->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button class="btn btn-secondary w-100" type="submit">Apply Filter</button>
+        </form>
+
+        <!-- product grid -->
+        <div class="col-12 col-md-9">
+            <div id="product-grid" class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3">
+                @foreach($products as $product)
+                    <div class="col">
+                        <div class="card h-100">
+                            <a href="{{ route('products.show', $product->id) }}">
+                                <img src="{{ asset($product->img1) }}"
+                                     class="card-img-top"
+                                     style="height: 300px; object-fit: cover;"
+                                     alt="{{ $product->name }}">
+                            </a>
+                            <div class="card-body">
+                                <a href="{{ route('products.show', $product->id) }}" class="text-dark text-decoration-none">
+                                    <h5 class="card-title">{{ $product->name }}</h5>
                                 </a>
-                                <div class="card-body">
-                                    <a href="{{ route('products.show', $product->id) }}" class="text-dark text-decoration-none">
-                                        <h5 class="card-title">{{ $product->name }}</h5>
-                                    </a>
-                                    <p class="card-text">{{ $product->price }}€</p>
-                                </div>
+                                <p class="card-text">{{ $product->price }}€</p>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-                <!-- Pagination links -->
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $products->links() }}
-                </div>
+                    </div>
+                @endforeach
             </div>
 
+            <!-- Pagination links -->
+            <div class="justify-content-center mt-3">
+                {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
+            </div>
 
-        </div>
-    </div>
+        </div> <!-- end product grid -->
+        
+    </div> <!-- end flex wrapper -->
+
+</div> <!-- end container -->
+
 
 </main>
 

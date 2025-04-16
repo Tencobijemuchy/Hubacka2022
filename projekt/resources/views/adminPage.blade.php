@@ -21,6 +21,24 @@
         </div>
     </nav>
 
+    <!-- search box and shopping cart icon -->
+    <div class="container d-flex align-items-center justify-content-between rounded-2 shadow bg-dark">
+        <form action="{{ route('adminPage') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">
+            <div class="py-2 d-flex w-100" style="max-width: 700px;">
+                <input type="text" name="name" value="{{ request('name') }}" class="form-control me-2" placeholder="Search box" />
+                <button type="submit" class="btn btn-light">Search</button>
+            </div>
+        </form>
+
+        <div>
+            <h2 class="mb-0 px-1">
+                <a href="{{ route('shoppingCart') }}" class="text-dark">
+                    <i class="bi bi-bag-fill"></i>
+                </a>
+            </h2>
+        </div>
+    </div>
+
   <!-- quick select -->
   <div class="container rounded-2 p-3 my-2 shadow bg-dark">
     <div class="row g-3">
