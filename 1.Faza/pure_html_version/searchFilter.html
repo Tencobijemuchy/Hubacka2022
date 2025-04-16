@@ -28,7 +28,7 @@
     </div>
   </nav>
 
-  
+
   <!-- search box and shoping cart icon -->
   <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
     <div class="flex-grow-1 d-flex justify-content-center ps-5">
@@ -61,12 +61,9 @@
     </div>
   </div>
 </div>
-  
-<!-- filter and products -->
-<div style="background-color: #80a080;" class="container rounded-2 p-3 my-2">
 
-    <div class="d-flex flex-column flex-md-row align-items-start gap-2">
 
+<<<<<<< HEAD
         <!-- filter -->
         <div class="col-12 col-md-3 mb-3 mb-md-0 p-3 bg-light rounded-2">
           <h4>Filter</h4>
@@ -158,6 +155,8 @@
         </div>
       </div>
 </div>
+=======
+>>>>>>> b25bae9ec6e61b19d34e43134d7e538b95f6bb12
 
 
 
@@ -165,7 +164,7 @@
 <footer class="mt-auto py-4" style="background-color: #80a080;">
     <div class="container">
       <div class="row text-center text-md-start justify-content-between align-items-center">
-        
+
         <!-- Address -->
         <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center mb-3 mb-md-0">
           <i class="bi bi-geo-alt-fill fs-4 me-2"></i>
@@ -174,7 +173,7 @@
             <strong>842 16 Bratislava 4</strong>
           </div>
         </div>
-  
+
         <!-- Phone -->
         <div class="col-12 col-lg-2 col-md-6 d-flex align-items-center mb-3 mb-md-0">
           <i class="bi bi-telephone-fill fs-4 me-2"></i>
@@ -182,7 +181,7 @@
             <strong>+421 905 194 679 </strong>
           </div>
         </div>
-  
+
         <!-- Email -->
         <div class="col-12 col-lg-3 col-md-6 d-flex align-items-center">
           <i class="bi bi-envelope-fill fs-4 me-2"></i>
@@ -190,78 +189,15 @@
             <a class="text-decoration-none text-dark fw-bold" aria-disabled="true"><strong>customer_helpline@LukEshop.com</strong></a>
           </div>
         </div>
-  
+
       </div>
     </div>
   </footer>
 
 
 
-  <script>
-    const products = [
-      { title: "Skaut Padouk", price: "218,49€", image: "assets/images/lazecky-skaut-padouk-dlouhy-luk/lazecky-skaut-padouk-dlouhy-luk-01.webp" },
-      { title: "Cobra", price: "296,75€", image: "assets/images/cobra/cobrat250.png" },
-      { title: "Falcon", price: "226,15€", image: "assets/images/falcon/products_falcon.png" },
-      { title: "Black Hawk", price: "319,89€", image: "assets/images/blackHawk/products_black_hawk.png" },
-      { title: "Ghost", price: "312,99€", image: "assets/images/ghost/Ghost-1__46356.jpg" },
-      { title: "Immortal", price: "289,49€", image: "assets/images/imortal/Immortal_2__04600.jpg" },
-      { title: "Kartal", price: "243,99€", image: "assets/images/kartal/Kartal__71859.webp" },
-      { title: "Red Deer", price: "325,99€", image: "assets/images/redDeer/products_red_deer.png" },
-      { title: "Skylark", price: "199,89€", image: "assets/images/skylark/Skylark__55835.png" },
-      { title: "Symphony", price: "281,49€", image: "assets/images/symphony/Symphony-1-1__07117.jpg" },
-      { title: "White Tail", price: "299,99€", image: "assets/images/whitetail/products_whitetail.png" }
-    ];
-  
-    const productsPerPage = 6;
-    let currentPage = 1;
-  
-    function displayProducts() {
-      const grid = document.getElementById("product-grid");
-      grid.innerHTML = "";
-      const start = (currentPage - 1) * productsPerPage;
-      const end = start + productsPerPage;
-      const visibleProducts = products.slice(start, end);
-  
-      visibleProducts.forEach(product => {
-        const productHTML = `
-          <div class="col">
-            <div class="card h-100">
-              <a href="ProcuctPage.html">
-                <img src="${product.image}" class="card-img-top" style="height: 300px; object-fit: cover;" alt="${product.title}">
-              </a>
-              <div class="card-body">
-                <a href="ProcuctPage.html" class="text-dark text-decoration-none">
-                  <h5 class="card-title">${product.title}</h5>
-                </a>
-                <p class="card-text">${product.price}</p>
-              </div>
-            </div>
-          </div>`;
-        grid.innerHTML += productHTML;
-      });
-  
-      document.getElementById("pageInfo").textContent = `Page ${currentPage} of ${Math.ceil(products.length / productsPerPage)}`;
-      document.getElementById("prevPage").disabled = currentPage === 1;
-      document.getElementById("nextPage").disabled = currentPage === Math.ceil(products.length / productsPerPage);
-    }
-  
-    document.getElementById("prevPage").addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        displayProducts();
-      }
-    });
-  
-    document.getElementById("nextPage").addEventListener("click", () => {
-      if (currentPage < Math.ceil(products.length / productsPerPage)) {
-        currentPage++;
-        displayProducts();
-      }
-    });
-  
-    displayProducts();
-  </script>
-  
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
