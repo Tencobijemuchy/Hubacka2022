@@ -149,6 +149,67 @@
                 </select>
             </div>
 
+            @if($selectedType == 1)
+                {{-- Bow Draw Weight --}}
+                <div class="mb-3">
+                    <label for="filter_bow_draw_weight" class="form-label">Napínacia sila</label>
+                    <select name="bow_draw_weight" id="filter_bow_draw_weight" class="form-select">
+                        <option value="">Všetky</option>
+                        @foreach($bow_draw_weights as $weight)
+                            <option value="{{ $weight->value }}" {{ request('bow_draw_weight') == $weight->value ? 'selected' : '' }}>
+                                {{ $weight->value }} lbs
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
+            @if($selectedType == 2)
+                {{-- Crossbow Draw Weight --}}
+                <div class="mb-3">
+                    <label for="filter_crossbow_draw_weight" class="form-label">Napínacia sila</label>
+                    <select name="crossbow_draw_weight" id="filter_crossbow_draw_weight" class="form-select">
+                        <option value="">Všetky</option>
+                        @foreach($crossbow_draw_weights as $weight)
+                            <option value="{{ $weight->value }}" {{ request('crossbow_draw_weights') == $weight->value ? 'selected' : '' }}>
+                                {{ $weight->value }} lbs
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
+            @if($selectedType == 3)
+                {{-- Slingshot Rubber Width --}}
+                <div class="mb-3">
+                    <label for="filter_slingshot_rubber_width" class="form-label">Sirka Gumy</label>
+                    <select name="slingshot_rubber_width" id="filter_slingshot_rubber_width" class="form-select">
+                        <option value="">Všetky</option>
+                        @foreach($slingshot_rubber_width as $width)
+                            <option value="{{ $width->value }}" {{ request('slingshot_rubber_width') == $width->value ? 'selected' : '' }}>
+                                {{ $width->value }} mm
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
+            @if($selectedType == 4)
+                {{-- Arrow Diameter --}}
+                <div class="mb-3">
+                    <label for="filter_arrow_diameter" class="form-label">Priemer šípu</label>
+                    <select name="arrow_diameter" id="filter_arrow_diameter" class="form-select">
+                        <option value="">Všetky</option>
+                        @foreach($arrow_diameter as $diameter)
+                            <option value="{{ $diameter->value }}" {{ request('arrow_diameter') == $diameter->value ? 'selected' : '' }}>
+                                {{ $diameter->value }} mm
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
+
             <button class="btn btn-secondary w-100" type="submit">Apply Filter</button>
         </form>
 
@@ -180,11 +241,11 @@
                 {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
 
-        </div> <!-- end product grid -->
+        </div> 
         
-    </div> <!-- end flex wrapper -->
+    </div> 
 
-</div> <!-- end container -->
+</div> 
 
 
 </main>

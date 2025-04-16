@@ -9,18 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-
         var chooseModalEl = document.getElementById('modalChooseProduct');
         var chooseModal = bootstrap.Modal.getInstance(chooseModalEl);
         if (chooseModal) {
             chooseModal.hide();
         }
 
-
         document.getElementById('product_type_id').value = productType;
 
         showHideFields(productType);
-
 
         var addModalEl = document.getElementById('modalAddProduct');
         var addModal = new bootstrap.Modal(addModalEl);

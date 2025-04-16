@@ -182,7 +182,7 @@
                         </p>
 
                     </div>
-
+                    @if($product->product_type_id != 5)
                     <div class="mb-3 bg-light rounded-2 shadow p-3">
                         <h5>Customization</h5>
 
@@ -201,18 +201,11 @@
                                 <label for="bow_length" class="form-label">Bow Length</label>
                                 <select id="bow_length" class="form-select">
                                     @foreach($bowLengths as $length)
-                                        <option value="{{ $length }}">{{ $length }}</option>
+                                        <option value="{{ $length }}">{{ $length }} cm</option>
                                     @endforeach
                                 </select>
                             </div>
-                        @endif
 
-
-
-
-
-
-                        @if($product->product_type_id == 1 || $product->product_type_id == 2)
                             <div class="mb-2">
                                 <label for="bow_strength" class="form-label">Draw Weight</label>
                                 <select id="bow_strength" class="form-select">
@@ -222,8 +215,54 @@
                                 </select>
                             </div>
                         @endif
-                    </div>
 
+
+                        @if($product->product_type_id == 2)
+                            <div class="mb-2">
+                                <label for="crossbow_draw_weight" class="form-label">Draw Weight</label>
+                                <select id="crossbow_draw_weight" class="form-select">
+                                    @foreach($crossbowDrawWeights as $weight)
+                                        <option value="{{ $weight }}">{{ $weight }} lbs</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
+
+                        @if($product->product_type_id == 3)
+                            <div class="mb-2">
+                                <label for="slingshot_rubber_width" class="form-label">Rubber width</label>
+                                <select id="slingshot_rubber_width" class="form-select">
+                                    @foreach($slingshotRubberWidth as $width)
+                                        <option value="{{ $width }}">{{ $width }} mm</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
+                        @if($product->product_type_id == 4)
+                            <div class="mb-2">
+                                <label for="arrow_length" class="form-label">Arrow Length</label>
+                                <select id="arrow_length" class="form-select">
+                                    @foreach($arrowLength as $length)
+                                        <option value="{{ $length }}">{{ $length }} cm</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="arrow_diameter" class="form-label">Arrow Diameter</label>
+                                <select id="arrow_diameter" class="form-select">
+                                    @foreach($arrowDiameter as $diameter)
+                                        <option value="{{ $diameter }}">{{ $diameter }} mm</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
+
+                    </div>
+                    @endif
                     <!-- Add to cart -->
                     <div class="d-flex align-items-center gap-2 mb-2 justify-content-between">
                         <div class="col-4">
