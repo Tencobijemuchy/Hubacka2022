@@ -43,6 +43,18 @@
         </div>
     </nav>
 
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="container">
+                <span class="fs-5">
+                <i class="bi bi-check-circle-fill px-2"></i>
+                {{ session('success') }}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <!-- search box and shopping cart icon -->
     <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
         <form action="{{ route('searchFilter') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">
@@ -182,15 +194,18 @@
                         </p>
 
                     </div>
+                    <form action="{{ route('shopping-cart.add') }}" method="POST">
+                    @csrf
+                
                     @if($product->product_type_id != 5)
                     <div class="mb-3 bg-light rounded-2 shadow p-3">
-                        <h5>Customization</h5>
+                            <h5>Customization</h5>
 
 
                         @if($product->product_type_id == 1)
                             <div class="mb-2">
                                 <label for="orientation" class="form-label">Orientation</label>
-                                <select id="orientation" class="form-select">
+                                <select id="orientation" name="customizations[orientation]" class="form-select">
                                     @foreach($orientations as $orient)
                                         <option value="{{ $orient }}">{{ ucfirst($orient) }}</option>
                                     @endforeach
@@ -199,7 +214,7 @@
 
                             <div class="mb-2">
                                 <label for="bow_length" class="form-label">Bow Length</label>
-                                <select id="bow_length" class="form-select">
+                                <select id="bow_length" name="customizations[bow_length]" class="form-select">
                                     @foreach($bowLengths as $length)
                                         <option value="{{ $length }}">{{ $length }} cm</option>
                                     @endforeach
@@ -208,7 +223,7 @@
 
                             <div class="mb-2">
                                 <label for="bow_strength" class="form-label">Draw Weight</label>
-                                <select id="bow_strength" class="form-select">
+                                <select id="bow_strength" name="customizations[bow_strength]" class="form-select">
                                     @foreach($drawWeights as $weight)
                                         <option value="{{ $weight }}">{{ $weight }} lbs</option>
                                     @endforeach
@@ -220,7 +235,7 @@
                         @if($product->product_type_id == 2)
                             <div class="mb-2">
                                 <label for="crossbow_draw_weight" class="form-label">Draw Weight</label>
-                                <select id="crossbow_draw_weight" class="form-select">
+                                <select id="crossbow_draw_weight" name="customizations[crossbow_draw_weight]" class="form-select">
                                     @foreach($crossbowDrawWeights as $weight)
                                         <option value="{{ $weight }}">{{ $weight }} lbs</option>
                                     @endforeach
@@ -232,7 +247,7 @@
                         @if($product->product_type_id == 3)
                             <div class="mb-2">
                                 <label for="slingshot_rubber_width" class="form-label">Rubber width</label>
-                                <select id="slingshot_rubber_width" class="form-select">
+                                <select id="slingshot_rubber_width" name="customizations[slingshot_rubber_width]" class="form-select">
                                     @foreach($slingshotRubberWidth as $width)
                                         <option value="{{ $width }}">{{ $width }} mm</option>
                                     @endforeach
@@ -243,7 +258,7 @@
                         @if($product->product_type_id == 4)
                             <div class="mb-2">
                                 <label for="arrow_length" class="form-label">Arrow Length</label>
-                                <select id="arrow_length" class="form-select">
+                                <select id="arrow_length" name="customizations[arrow_length]" class="form-select">
                                     @foreach($arrowLength as $length)
                                         <option value="{{ $length }}">{{ $length }} cm</option>
                                     @endforeach
@@ -252,7 +267,7 @@
 
                             <div class="mb-2">
                                 <label for="arrow_diameter" class="form-label">Arrow Diameter</label>
-                                <select id="arrow_diameter" class="form-select">
+                                <select id="arrow_diameter" name="customizations[arrow_diameter]" class="form-select">
                                     @foreach($arrowDiameter as $diameter)
                                         <option value="{{ $diameter }}">{{ $diameter }} mm</option>
                                     @endforeach
@@ -263,19 +278,24 @@
 
                     </div>
                     @endif
+                    <div class="d-flex align-items-center gap-2 mb-2 justify-content-between"">
                     <!-- Add to cart -->
-                    <div class="d-flex align-items-center gap-2 mb-2 justify-content-between">
-                        <div class="col-4">
-                            <button class="btn btn-warning">Add to cart</button>
-                        </div>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        
                         <div class="col-3">
-                            <button class="btn btn-warning active">{{ $product->price }}€</button>
+                            <span class="btn btn-warning active">{{ $product->price }}€</span>
+                        </div>
+
+                        <div class="col-3">
+                            <button type="submit" class="btn btn-warning">Add to cart</button>
                         </div>
                         <div class="col-3 d-flex flex-column align-items-end">
                             <label for="amount" class="form-label mb-1">Amount</label>
-                            <input type="number" id="order_amount" class="form-control" style="max-width: 70px; min-width: 50px;" min="1" value="1">
+                            <input type="number" name="quantity" id="order_amount" class="form-control" style="max-width: 70px; min-width: 50px;" min="1" value="1" required>
                         </div>
                     </div>
+                    </form>
+                    
                 </div>
             </div>
 

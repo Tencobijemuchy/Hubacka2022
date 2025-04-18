@@ -4,14 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProductController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
-
-Route::get('/shopping-cart', function () {
-    return view('ShoppingCart');
-})->name('shoppingCart');
 
 Route::get('/order-details', function () {
     return view('order_details');
@@ -55,3 +52,12 @@ Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->na
 Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
 
 
+
+Route::post('/shopping-cart', [CartController::class, 'addToCart'])->name('shopping-cart.add');
+
+Route::get('/shopping-cart', [CartController::class, 'showCart'])->name('shoppingCart');
+
+Route::delete('/shopping-cart/{id}', [CartController::class, 'destroy'])->name('shopping-cart.destroy');
+
+
+?>

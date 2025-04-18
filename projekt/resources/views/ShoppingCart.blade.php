@@ -45,7 +45,17 @@
             </div>
         </div>
     </nav>
-
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="container">
+                <span class="fs-5">
+                <i class="bi bi-check-circle-fill px-2"></i>
+                {{ session('success') }}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
     <!-- search box and shopping cart icon -->
     <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
         <form action="{{ route('searchFilter') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">
@@ -91,37 +101,36 @@
         <h2 class="mb-3">Shopping Cart</h2>
 
         <!--------------------- item in Cart -------------------->
-        <div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
+        @foreach ($items as $item)
+            <div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
+                <!-- photo -->
+                <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
+                    <img src="{{ asset($item->img1) }}" class="img-fluid bg-light rounded-2 shadow" style="height: 200px;" alt="Product image">
+                </div>
 
-            <!-- photo -->
-            <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
-                <img src="assets/images/bows/lazecky-skaut-padouk-dlouhy-luk-01.webp" class="img-fluid rounded-2 responsive-cart-img" alt="Foto produktu">
-            </div>
+                <!-- Specs -->
+                <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <h5>{{ $item->name }}</h5>
+                    <p class="mb-1">{{ $item->customizations }}</p>
+                </div>
 
+                <!-- prices -->
+                <div class="col-12 col-md-4 d-flex flex-column align-items-end">
+                    <p class="mb-1">Price: {{ number_format($item->price, 2) }}</p>
 
-            <!-- Specs -->
-            <div class="col-12 col-md-6 mb-3 mb-md-0">
-                <h5>Product Name 1</h5>
-                <p class="mb-1">Specifications and chosen customizations of selected product.</p>
-                <p class="mb-1">Orientation: --- | Length: ---" | Draw Weight: --- lbs</p>
-
-            </div>
-
-            <!-- prices -->
-            <div class="col-12 col-md-4 d-flex flex-column align-items-end">
-                <!-- Cenové informácie hore -->
-                <p class="mb-1">Price without DPH: 100.00</p>
-                <p class="mb-1">Price with DPH: 120.00</p>
-
-                <!-- buttons -->
-                <div class="mt-auto d-flex align-items-center gap-2">
-                    <label for="1" class="mb-0">Amount</label>
-                    <input type="number" id="cart_item_amount_picker" class="form-control" style="width:80px;" min="1" value="1">
-                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    <div class="mt-auto d-flex align-items-center gap-2">
+                        <label for="item_{{ $item->id }}" class="mb-0">Amount</label>
+                        <input type="number" id="item_{{ $item->id }}" name="amounts[{{ $item->id }}]" class="form-control" style="width:80px;" min="1" value="{{ $item->quantity }}">
+                        
+                        <form action="{{ route('shopping-cart.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-        </div>
+        @endforeach
 
 
 
@@ -136,7 +145,7 @@
                     <a class="btn btn-success btn-lg" href="{{ route('orderDetails') }}">Order now</a>
                 </div>
                 <div class="text-md-end">
-                    <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: ------</p>
+                    <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: {{ $totalPrice }}</p>
                 </div>
             </div>
         </div>

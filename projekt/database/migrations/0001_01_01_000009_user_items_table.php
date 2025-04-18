@@ -7,15 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('cart_items', function (Blueprint $table) {
+        Schema::create('user_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cart_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->json('customizations')->nullable();
             $table->integer('quantity');
             $table->timestamps();
 
-            $table->foreign('cart_id')
-                ->references('id')->on('cart')
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
 
             $table->foreign('product_id')
@@ -26,6 +27,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('cart_items');
+        Schema::dropIfExists('user_items');
     }
 };

@@ -10,10 +10,10 @@ INSERT INTO product_attributes (id, product_type_id, name, data_type, created_at
 VALUES 
   (1, 1, 'bow_length', 'number', NOW(), NOW()),
   (2, 1, 'draw_weight', 'number', NOW(), NOW()),
-  (3, 1, 'orientation', 'enum', NOW(), NOW());
-  (4, 2, 'crossbow_draw_weight', 'number', NOW(), NOW());
-  (5, 3, 'slingshot_rubber_width', 'number', NOW(), NOW());
-  (6, 4, 'arrow_lenght', 'number', NOW(), NOW());
+  (3, 1, 'orientation', 'enum', NOW(), NOW()),
+  (4, 2, 'crossbow_draw_weight', 'number', NOW(), NOW()),
+  (5, 3, 'slingshot_rubber_width', 'number', NOW(), NOW()),
+  (6, 4, 'arrow_lenght', 'number', NOW(), NOW()),
   (7, 4, 'arrow_diameter', 'number', NOW(), NOW());
 
 
