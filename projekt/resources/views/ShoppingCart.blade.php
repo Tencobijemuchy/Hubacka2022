@@ -123,9 +123,10 @@
 
             <div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
                 <!-- photo -->
-                <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
-                    <img src="{{ asset($img) }}" class="img-fluid bg-light rounded-2 shadow" style="height: 200px;" alt="Product image">
+                <div class="col-12 col-md-2 text-center mb-3 mb-md-0" style="overflow: hidden;">
+                    <img src="{{ asset($img) }}" class="img-fluid bg-light rounded-2 shadow" style="height: 200px; width: auto; object-fit: cover;" alt="Product image">
                 </div>
+
 
                 <!-- Specs -->
                 <div class="col-12 col-md-6 mb-3 mb-md-0">
@@ -172,7 +173,7 @@
             <div class="container container d-flex align-items-center justify-content-between">
 
                 <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                    <a class="btn btn-success btn-lg" href="{{ route('orderDetails') }}">Order now</a>
+                    <a class="btn btn-success btn-lg" href="{{ route('order.form') }}">Order now</a>
                 </div>
                 <div class="text-md-end">
                     <p class="mt-2 mt-md-0 mb-0 fw-bold" id="cart-total">Total price: {{ $totalPrice }}</p>

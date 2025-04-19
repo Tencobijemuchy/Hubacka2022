@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('index');
@@ -61,6 +62,9 @@ Route::delete('/shopping-cart/{id}', [CartController::class, 'destroy'])->name('
 
 Route::post('/shopping-cart/update-quantity', [CartController::class, 'updateQuantity'])->name('shopping-cart.updateQuantity');
 
+Route::get('/order', [OrderController::class, 'showOrderForm'])->name('order.form');
+
+Route::post('/order', [OrderController::class, 'placeOrder'])->name('order.submit');
 
 
 Route::get('/reset-cart', function () {

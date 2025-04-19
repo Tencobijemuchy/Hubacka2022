@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
+            $table->json('customizations')->nullable();
             $table->integer('quantity');
             $table->decimal('price', 6, 2);
             $table->timestamps();

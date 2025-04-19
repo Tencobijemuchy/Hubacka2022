@@ -339,7 +339,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with('specifications')->findOrFail($id);//nacita product
+        $product = Product::with('specifications')->findOrFail($id);
 
 
         $bowLengths  = $product->specifications->where('attribute_id', 1)->pluck('value');

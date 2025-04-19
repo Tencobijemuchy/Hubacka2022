@@ -72,8 +72,8 @@
             <div class="bg-white rounded-3 p-2 d-flex justify-content-center mb-2">
                 <div class="row w-100">
                     <!-- Image Column -->
-                    <div class="col-3 col-md-2 d-flex justify-content-center align-items-center">
-                        <img src="{{ asset($product->img1) }}" class="img-fluid" style="height: 200px;" alt="{{ $product->name }}">
+                    <div class="col-12 col-md-2 text-center mb-3 mb-md-0" style="overflow: hidden;">
+                        <img src="{{ asset($product->img1) }}" class="img-fluid bg-light rounded-2 shadow" style="height: 200px; width: auto; object-fit: cover;" alt="Product image">
                     </div>
                     <!-- Description + Buttons Column -->
                     <div class="col-9 col-md-10 d-flex flex-column">

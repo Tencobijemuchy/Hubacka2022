@@ -47,6 +47,18 @@
       </div>
   </nav>
 
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="container">
+                <span class="fs-5">
+                <i class="bi bi-check-circle-fill px-2"></i>
+                {{ session('success') }}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <!-- search box and shopping cart icon -->
     <div style="background-color: #80a080;" class="container d-flex align-items-center justify-content-between rounded-2 shadow">
         <form action="{{ route('searchFilter') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">

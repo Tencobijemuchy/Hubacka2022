@@ -16,7 +16,6 @@
             <div>
             </div>
             <div class="d-flex align-items-center flex-nowrap">
-                <!-- temporary admin access until php login is functional -->
 
                 <div class="dropdown">
                     @if(auth()->check())
