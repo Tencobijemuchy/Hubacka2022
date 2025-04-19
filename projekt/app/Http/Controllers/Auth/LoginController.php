@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         if ($user && $user->password === $credentials['password']) {
             $request->session()->regenerate();
-            auth()->login($user); // Nastaví session
+            auth()->login($user); 
 
 
             if ($user->username === 'admin') {
@@ -39,8 +39,11 @@ class LoginController extends Controller
             return redirect()->route('index');
         }
 
-        return back()->withErrors([
-            'login' => 'The provided credentials do not match our records.',
-        ])->onlyInput('login');
+        return back()
+            ->withErrors([
+                'login' => 'Invalid credentials. Please try again.',
+            ])
+            ->withInput()
+            ->with('login_failed', true);
     }
 }

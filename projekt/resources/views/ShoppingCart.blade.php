@@ -100,29 +100,58 @@
     <div style="background-color: #80a080;" class="container rounded-2 p-4 my-2">
         <h2 class="mb-3">Shopping Cart</h2>
 
-        <!--------------------- item in Cart -------------------->
         @foreach ($items as $item)
+            @php
+                // if the user is looged in we must take the items from his cart, other we must take them from the session 
+                $isObject = is_object($item);
+                $id = $isObject ? $item->product_id ?? $item->id : $item['id'];
+                $name = $isObject ? $item->name : $item['name'];
+                $price = $isObject ? $item->price : $item['price'];
+                $description = $isObject ? $item->description : $item['description'];
+                $quantity = $isObject ? $item->quantity : $item['quantity'];
+                $img = $isObject ? $item->img1 : $item['img1'];
+                $rawCustom = is_object($item) ? $item->customizations : ($item['customizations'] ?? null);
+
+                $customizations = is_string($rawCustom) && str_starts_with(trim($rawCustom), '{')
+                    ? json_decode($rawCustom, true)
+                    : $rawCustom;
+
+                if (is_array($customizations)) {
+                    $customizations = array_filter($customizations, fn($value) => !is_null($value) && $value !== '');
+                }
+            @endphp
+
             <div class="row mb-2 p-2 rounded-2" style="background-color: #b9d2b6;">
                 <!-- photo -->
                 <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
-                    <img src="{{ asset($item->img1) }}" class="img-fluid bg-light rounded-2 shadow" style="height: 200px;" alt="Product image">
+                    <img src="{{ asset($img) }}" class="img-fluid bg-light rounded-2 shadow" style="height: 200px;" alt="Product image">
                 </div>
 
                 <!-- Specs -->
                 <div class="col-12 col-md-6 mb-3 mb-md-0">
-                    <h5>{{ $item->name }}</h5>
-                    <p class="mb-1">{{ $item->customizations }}</p>
+                    <p class="fs-5 mb-2"><strong>{{ $name }}</strong></p>
+                    <p class="fs-6 mb-2">{{ $description }}</p>
+
+                    @if (is_array($customizations) && count($customizations))
+                        <p class="mb-1 text-muted">
+                            @foreach ($customizations as $key => $value)
+                                <span><strong>{{ ucfirst($key) }}:</strong> {{ $value }}</span>@if (!$loop->last) <span class="mx-1">|</span> @endif
+                            @endforeach
+                        </p>
+                    @elseif (!empty($customizations))
+                        <p class="mb-1 text-muted">{{ $customizations }}</p>
+                    @endif
                 </div>
 
                 <!-- prices -->
-                <div class="col-12 col-md-4 d-flex flex-column align-items-end">
-                    <p class="mb-1">Price: {{ number_format($item->price, 2) }}</p>
+                <div class="col-12 col-md-4 d-flex flex-column align-items-end text-end">
+                    <p class="mb-1 fs-5">Price: {{ number_format($price, 2) }}</p>
 
                     <div class="mt-auto d-flex align-items-center gap-2">
-                        <label for="item_{{ $item->id }}" class="mb-0">Amount</label>
-                        <input type="number" id="item_{{ $item->id }}" name="amounts[{{ $item->id }}]" class="form-control" style="width:80px;" min="1" value="{{ $item->quantity }}">
-                        
-                        <form action="{{ route('shopping-cart.destroy', $item->id) }}" method="POST">
+                        <label for="item_{{ $id }}" class="mb-0">Amount</label>
+                        <input type="number" id="item_{{ $id }}" name="amounts[{{ $id }}]" class="form-control" style="width:80px;" min="1" value="{{ $quantity }}">
+
+                        <form action="{{ route('shopping-cart.destroy', $id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
@@ -137,6 +166,7 @@
 
 
 
+
         <!-- ORDER NOW a Total Price -->
         <div class="row mt-4 ms-5">
             <div class="container container d-flex align-items-center justify-content-between">
@@ -145,7 +175,7 @@
                     <a class="btn btn-success btn-lg" href="{{ route('orderDetails') }}">Order now</a>
                 </div>
                 <div class="text-md-end">
-                    <p class="mt-2 mt-md-0 mb-0 fw-bold">Total price: {{ $totalPrice }}</p>
+                    <p class="mt-2 mt-md-0 mb-0 fw-bold" id="cart-total">Total price: {{ $totalPrice }}</p>
                 </div>
             </div>
         </div>

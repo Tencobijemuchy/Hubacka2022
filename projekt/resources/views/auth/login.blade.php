@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('login_failed'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="container">
+                <span class="fs-5">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                Login failed. Please check your credentials.
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
     <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #B7C9B2;">
         <div class="container">
             <div class="row" style="height: 700px;">
@@ -23,7 +34,7 @@
                             <label class="form-label">Username or Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                                <input type="text" name="login" class="form-control" placeholder="Enter username or email" value="{{ old('login') }}" required>
+                                <input type="text" name="login" class="form-control @error('login') is-invalid @enderror" placeholder="Enter username or email" value="{{ old('login') }}" required>
                             </div>
                         </div>
 
@@ -31,7 +42,10 @@
                             <label class="form-label">Password</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                                <input type="password" name="password" class="form-control  @error('login') is-invalid @enderror" placeholder="Enter password" required>
+                                @error('login')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

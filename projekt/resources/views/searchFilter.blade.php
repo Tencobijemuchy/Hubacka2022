@@ -132,7 +132,6 @@
                     <option value="">Nezadané</option>
                     <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Najlacnejšie</option>
                     <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Najdrahšie</option>
-                    <option value="popularity" {{ request('sort') == 'popularity' ? 'selected' : '' }}>Najpopulárnejšie</option>
                 </select>
             </div>
 

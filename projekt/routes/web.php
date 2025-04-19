@@ -59,5 +59,13 @@ Route::get('/shopping-cart', [CartController::class, 'showCart'])->name('shoppin
 
 Route::delete('/shopping-cart/{id}', [CartController::class, 'destroy'])->name('shopping-cart.destroy');
 
+Route::post('/shopping-cart/update-quantity', [CartController::class, 'updateQuantity'])->name('shopping-cart.updateQuantity');
+
+
+
+Route::get('/reset-cart', function () {
+    session()->forget('cart');
+    return redirect()->route('shoppingCart')->with('success', 'Cart has been reset.');
+});
 
 ?>
