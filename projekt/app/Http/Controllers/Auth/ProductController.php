@@ -382,78 +382,82 @@ class ProductController extends Controller
 
     public function searchFilter(Request $request, $type = null)
     {
-        $query = Product::query();
-            
-        // If a name is provided, ignore type filtering and search by name
+        $query = DB::table('products')
+            ->select('products.*')
+            ->leftJoin('product_specifications', 'products.id', '=', 'product_specifications.product_id');
+
+        // Search by name overrides product type
         if ($request->filled('name')) {
-            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
+            $query->where('products.name', 'LIKE', '%' . $request->input('name') . '%');
             $type = null;
         }
-        if ($type !== null) {
-            $query->where('product_type_id', $type);
+
+        if (!is_null($type)) {
+            $query->where('products.product_type_id', $type);
         }
-    
-        // Price range filter
+
+        // Price filters
         if ($request->filled('price_min')) {
-            $query->where('price', '>=', $request->input('price_min'));
+            $query->where('products.price', '>=', $request->input('price_min'));
         }
         if ($request->filled('price_max')) {
-            $query->where('price', '<=', $request->input('price_max'));
+            $query->where('products.price', '<=', $request->input('price_max'));
         }
-        
+
         // Manufacturer filter
         if ($request->filled('manufacturer')) {
-            $query->where('manufacturer_id', $request->input('manufacturer'));
+            $query->where('products.manufacturer_id', $request->input('manufacturer'));
         }
-    
+
+        // Product specification filters
+        $attributeFilters = [
+            'bow_draw_weight' => 2,
+            'crossbow_draw_weight' => 4,
+            'slingshot_rubber_width' => 5,
+            'arrow_diameter' => 7,
+        ];
+
+        foreach ($attributeFilters as $inputKey => $attributeId) {
+            if ($request->filled($inputKey)) {
+                $query->where('product_specifications.attribute_id', $attributeId)
+                    ->where('product_specifications.value', $request->input($inputKey));
+            }
+        }
+
         // Sorting
         switch ($request->input('sort')) {
             case 'price_asc':
-                $query->orderBy('price', 'asc');
+                $query->orderBy('products.price', 'asc');
                 break;
             case 'price_desc':
-                $query->orderBy('price', 'desc');
+                $query->orderBy('products.price', 'desc');
                 break;
         }
 
+        $products = $query->distinct('products.id')->paginate(6)->appends($request->query());
+        $manufacturers = DB::table('manufacturers')->get();
 
-        $bow_draw_weights = [];
-        $crossbow_draw_weights = [];
-        $slingshot_rubber_width = [];
-        $arrow_diameter = [];
+        $specOptions = [
+            'bow_draw_weights' => [1, 2],
+            'crossbow_draw_weights' => [2, 4],
+            'slingshot_rubber_width' => [3, 5],
+            'arrow_diameter' => [4, 7],
+        ];
 
-        
-        $products = $query->paginate(6)->appends($request->query());
-        $manufacturers = Manufacturer::all();
-        if($type == 1){
-            $bow_draw_weights = DB::table('products')
-                ->join('product_specifications','products.id','=','product_specifications.product_id')
-                ->where('product_type_id', $type)
-                ->where('attribute_id',2)
-                ->get();
+        $bow_draw_weights = $crossbow_draw_weights = $slingshot_rubber_width = $arrow_diameter = [];
+
+        foreach ($specOptions as $var => [$checkType, $attrId]) {
+            if ($type == $checkType) {
+                $$var = DB::table('product_specifications')
+                    ->join('products', 'product_specifications.product_id', '=', 'products.id')
+                    ->where('products.product_type_id', $checkType)
+                    ->where('product_specifications.attribute_id', $attrId)
+                    ->select('product_specifications.value')
+                    ->distinct()
+                    ->get();
+            }
         }
-        if($type == 2){
-            $crossbow_draw_weights = DB::table('products')
-                ->join('product_specifications','products.id','=','product_specifications.product_id')
-                ->where('product_type_id', $type)
-                ->where('attribute_id',4)
-                ->get();
-        }
-        if($type == 3){
-            $slingshot_rubber_width = DB::table('products')
-                ->join('product_specifications','products.id','=','product_specifications.product_id')
-                ->where('product_type_id', $type)
-                ->where('attribute_id',5)
-                ->get();
-        }
-        if($type == 4){
-            $arrow_diameter = DB::table('products')
-                ->join('product_specifications','products.id','=','product_specifications.product_id')
-                ->where('product_type_id', $type)
-                ->where('attribute_id',7)
-                ->get();
-        }
-        
+
         return view('searchFilter', [
             'products' => $products,
             'selectedType' => $type,
@@ -465,7 +469,7 @@ class ProductController extends Controller
             'arrow_diameter' => $arrow_diameter,
         ]);
     }
-    
+
 
 
 }

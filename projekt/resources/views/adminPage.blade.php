@@ -21,6 +21,29 @@
         </div>
     </nav>
 
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="container">
+                <span class="fs-5">
+                <i class="bi bi-check-circle-fill px-2"></i>
+                {{session('success')}}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="container">
+                <span class="fs-5">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                {{session('error')}}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <!-- search box and shopping cart icon -->
     <div class="container d-flex align-items-center justify-content-between rounded-2 shadow bg-dark">
         <form action="{{ route('adminPage') }}" method="GET" class="flex-grow-1 d-flex justify-content-center ps-5">
