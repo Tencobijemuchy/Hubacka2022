@@ -74,7 +74,7 @@ class OrderController extends Controller
                 'order_id' => $orderId,
                 'product_id' => $productId,
                 'quantity' => $quantity,
-                'customizations' => $customizations,
+                'customizations' => json_encode($customizations),
                 'price' => $price,
                 'created_at' => now(),
                 'updated_at' => now(),

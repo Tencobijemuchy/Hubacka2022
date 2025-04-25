@@ -150,7 +150,7 @@
 
                     <div class="mt-auto d-flex align-items-center gap-2">
                         <label for="item_{{ $id }}" class="mb-0">Amount</label>
-                        <input type="number" id="item_{{ $id }}" name="amounts[{{ $id }}]" class="form-control" style="width:80px;" min="1" value="{{ $quantity }}">
+                        <input type="number" id="item_{{ $id }}" name="amounts[{{ $id }}]" oninput="if (this.value < 1) this.value = 1;" class="form-control" style="width:80px;" min="1" value="{{ $quantity }}">
 
                         <form action="{{ route('shopping-cart.destroy', $id) }}" method="POST">
                             @csrf

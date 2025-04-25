@@ -291,7 +291,7 @@
                         </div>
                         <div class="col-3 d-flex flex-column align-items-end">
                             <label for="amount" class="form-label mb-1">Amount</label>
-                            <input type="number" name="quantity" id="order_amount" class="form-control" style="max-width: 70px; min-width: 50px;" min="1" value="1" required>
+                            <input type="number" name="quantity" id="order_amount" class="form-control" oninput="if (this.value < 1) this.value = 1;" style="max-width: 70px; min-width: 50px;" min="1" value="1" required>
                         </div>
                     </div>
                     </form>
