@@ -242,7 +242,7 @@
                         <div class="mb-3 d-none" id="field_bow_length">
                             <label class="form-label">Bow length</label>
                             <div class="input-group">
-                                <input type="text" id="bow_length_input" class="form-control" placeholder="Enter bow length">
+                                <input type="text" id="bow_length_input" class="form-control" placeholder="Enter bow length"  required>
                                 <button type="button" id="addBowLengthButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="bowLengthList" class="text-muted"></small>
@@ -253,7 +253,7 @@
                         <div class="mb-3 d-none" id="field_draw_weight">
                             <label class="form-label">Draw weight</label>
                             <div class="input-group">
-                                <input type="text" id="draw_weight_input" class="form-control" placeholder="Enter draw weight">
+                                <input type="text" id="draw_weight_input" class="form-control" placeholder="Enter draw weight"  required>
                                 <button type="button" id="addDrawWeightButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="drawWeightList" class="text-muted"></small>
@@ -266,7 +266,6 @@
                             <label class="form-label">Orientation</label>
                             <div class="input-group">
                                 <select id="orientation_select" class="form-select">
-                                    <option value="">Select orientation</option>
                                     <option value="left">Left</option>
                                     <option value="right">Right</option>
                                     <option value="universal">Universal</option>
@@ -280,7 +279,7 @@
                         <div class="mb-3 d-none" id="field_crossbow_draw_weight">
                             <label class="form-label">Draw weight</label>
                             <div class="input-group">
-                                <input type="text" id="crossbow_draw_weight_input" class="form-control" placeholder="Enter draw weight">
+                                <input type="text" id="crossbow_draw_weight_input" class="form-control" placeholder="Enter draw weight" required>
                                 <button type="button" id="addCrossbowDrawWeightButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="crossbowDrawWeightList" class="text-muted"></small>
@@ -291,7 +290,7 @@
                         <div class="mb-3 d-none" id="field_sling_shot_rubber_width">
                             <label class="form-label">Rubber Width</label>
                             <div class="input-group">
-                                <input type="text" id="sling_shot_rubber_width_input" class="form-control" placeholder="Enter Rubber Width">
+                                <input type="text" id="sling_shot_rubber_width_input" class="form-control" placeholder="Enter Rubber Width" required>
                                 <button type="button" id="add_sling_shot_rubber_widthButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="sling_shot_rubber_width_List" class="text-muted"></small>
@@ -304,7 +303,7 @@
                         <div class="mb-3 d-none" id="field_arrow_length">
                             <label class="form-label">Arrow Length</label>
                             <div class="input-group">
-                                <input type="text" id="arrow_length_input" class="form-control" placeholder="Enter Arrow Length">
+                                <input type="text" id="arrow_length_input" class="form-control" placeholder="Enter Arrow Length" required>
                                 <button type="button" id="add_arrow_lengthButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="arrow_length_List" class="text-muted"></small>
@@ -314,7 +313,7 @@
                         <div class="mb-3 d-none" id="field_arrow_diameter">
                             <label class="form-label">Arrow Diameter</label>
                             <div class="input-group">
-                                <input type="text" id="arrow_diameter_input" class="form-control" placeholder="Enter Arrow Diameter">
+                                <input type="text" id="arrow_diameter_input" class="form-control" placeholder="Enter Arrow Diameter" required>
                                 <button type="button" id="add_arrow_diameterButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="arrow_diameter_List" class="text-muted"></small>
