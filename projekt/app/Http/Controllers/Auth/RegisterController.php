@@ -33,6 +33,7 @@ class RegisterController extends Controller
             'email'    => $request->email,
             'username' => $request->username,
             'password' => $request->password,
+            'is_admin'  => false,
         ]);
 
         auth()->login($user);

@@ -7,57 +7,77 @@ use App\Http\Controllers\Auth\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 
-// verejné routy
+/*
+|--------------------------------------------------------------------------
+| Verejné routy
+|--------------------------------------------------------------------------
+*/
 Route::get('/', fn() => view('index'))->name('index');
 Route::get('/order-details', fn() => view('order_details'))->name('orderDetails');
 Route::get('/product-page', fn() => view('productPage'))->name('productPage');
 Route::get('/account', fn() => view('account'))->name('account');
 
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])
+    ->name('register');
+Route::post('/register', [RegisterController::class, 'register'])
+    ->name('register.submit');
 
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+Route::get('/login', [LoginController::class, 'showLoginForm'])
+    ->name('login');
+Route::post('/login', [LoginController::class, 'login'])
+    ->name('login.submit');
 
 Route::post('/logout', function () {
     auth()->logout();
     return redirect()->route('index');
 })->name('logout');
 
-// vyhľadávanie a filtrovanie (dostupné pre všetkých)
 Route::get('/search-filter/{type?}', [ProductController::class, 'searchFilter'])
     ->name('searchFilter');
 
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.show');
 
-// nákupný košík a objednávky (dostupné pre prihlásených)
-Route::middleware('auth')->group(function(){
-    Route::post('/shopping-cart', [CartController::class, 'addToCart'])
-        ->name('shopping-cart.add');
-    Route::get('/shopping-cart', [CartController::class, 'showCart'])
-        ->name('shoppingCart');
-    Route::delete('/shopping-cart/{id}', [CartController::class, 'destroy'])
-        ->name('shopping-cart.destroy');
-    Route::post('/shopping-cart/update-quantity', [CartController::class, 'updateQuantity'])
-        ->name('shopping-cart.updateQuantity');
+/*
+|--------------------------------------------------------------------------
+| Nákupný košík – dostupné pre guestov aj prihlásených
+|--------------------------------------------------------------------------
+*/
+Route::post('/shopping-cart', [CartController::class, 'addToCart'])
+    ->name('shopping-cart.add');
+Route::get('/shopping-cart', [CartController::class, 'showCart'])
+    ->name('shoppingCart');
+Route::delete('/shopping-cart/{id}', [CartController::class, 'destroy'])
+    ->name('shopping-cart.destroy');
+Route::post('/shopping-cart/update-quantity', [CartController::class, 'updateQuantity'])
+    ->name('shopping-cart.updateQuantity');
 
+/*
+|--------------------------------------------------------------------------
+| Objednávky – len pre prihlásených (auth)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function(){
     Route::get('/order', [OrderController::class, 'showOrderForm'])
         ->name('order.form');
     Route::post('/order', [OrderController::class, 'placeOrder'])
         ->name('order.submit');
-
     Route::get('/reset-cart', function () {
         session()->forget('cart');
-        return redirect()->route('shoppingCart')->with('success', 'Cart has been reset.');
+        return redirect()->route('shoppingCart')
+            ->with('success', 'Cart has been reset.');
     })->name('cart.reset');
 });
 
-// adminské routy: prihlásený + is_admin
+/*
+|--------------------------------------------------------------------------
+| Admin sekcia – prihlásený + is.admin
+|--------------------------------------------------------------------------
+*/
 Route::prefix('admin')
     ->middleware(['auth', 'is.admin'])
     ->group(function(){
-        // hlavnú admin stránku
+        // Hlavná admin stránka
         Route::get('/{type?}', [ProductController::class, 'showAdminPage'])
             ->name('adminPage');
 
