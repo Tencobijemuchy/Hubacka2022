@@ -21,23 +21,23 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-
         $user = User::where('email', $credentials['login'])
             ->orWhere('username', $credentials['login'])
             ->first();
+        //dd($credentials, $user);
 
 
         if ($user && $user->password === $credentials['password']) {
             $request->session()->regenerate();
-            auth()->login($user); 
+            auth()->login($user);
 
-
-            if ($user->username === 'admin') {
+            if ($user->is_admin) {
                 return redirect()->route('adminPage');
             }
-
             return redirect()->route('index');
         }
+
+
 
         return back()
             ->withErrors([
