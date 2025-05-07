@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Middleware\IsAdmin;
 
 
 Route::get('/', fn() => view('index'))->name('index');
@@ -47,7 +48,8 @@ Route::post('/order', [OrderController::class, 'placeOrder'])->name('order.submi
 
 
 Route::prefix('admin')
-    ->middleware(['auth', 'is.admin'])
+    ->middleware(['auth', IsAdmin::class])
+
     ->group(function(){
         Route::get('/{type?}', [ProductController::class, 'showAdminPage'])->name('adminPage');
 

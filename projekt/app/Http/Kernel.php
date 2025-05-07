@@ -8,7 +8,12 @@ class Kernel extends HttpKernel
 {
 
     protected $middleware = [
-
+        \App\Http\Middleware\TrustProxies::class,
+        \Fruitcake\Cors\HandleCors::class,
+        \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
+        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+        \App\Http\Middleware\TrimStrings::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
 
@@ -28,10 +33,11 @@ class Kernel extends HttpKernel
         ],
     ];
 
+
     protected $routeMiddleware = [
         'auth'      => \App\Http\Middleware\Authenticate::class,
         'guest'     => \App\Http\Middleware\RedirectIfAuthenticated::class,
-
-        'is.admin'  => \App\Http\Middleware\IsAdmin::class,
+        'is_admin'  => \App\Http\Middleware\IsAdmin::class,
     ];
+
 }
