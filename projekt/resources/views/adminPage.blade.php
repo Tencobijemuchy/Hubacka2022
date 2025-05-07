@@ -6,17 +6,28 @@
         <div class="container d-flex align-items-center justify-content-between flex-nowrap">
             <div class="d-flex align-items-center flex-nowrap">
                 <a href="#" class="me-3">
-                    <img class="img-fluid" style="width:60px;" src="assets/images/logo.svg" alt="logo">
+                    <img class="img-fluid" style="width:60px;"
+                         src="{{ asset('assets/images/logo.svg') }}"
+                         alt="logo">
                 </a>
+
+
                 <h1 class="mb-0 fs-4"><a href="#" class="text-white text-decoration-none">LukEshop</a></h1>
             </div>
             <div></div>
             <h1 class="pe-5 text-white">Admin</h1>
             <div></div>
             <div class="d-flex align-items-center flex-nowrap">
-                <a type="button" class="btn btn-danger d-flex align-items-center" href="{{ route('index') }}">
-                    <i class="bi bi-person-dash fs-4 me-2"></i>Log out
+                <a href="{{ route('logout') }}"
+                   class="btn btn-danger d-flex align-items-center"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bi bi-person-dash fs-4 me-2"></i>
+                    Log out
                 </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
     </nav>
