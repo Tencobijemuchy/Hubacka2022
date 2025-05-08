@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
                 'name' => 'Apollo’s Whisper',
                 'description' => 'A finely crafted longbow, said to channel the precision of the god of archery himself.',
                 'img1' => 'assets/images/bows/HOYT-PRO-FORCE-COMPOUND-BOW3-2536972794.png',
-                'img2' => 'assets/images/bows/ws-75ac+front+1200-65692317.png',
+                'img2' => 'assets/images/bows/PSE-Mini-Burner-2721639842.png',
                 'img3' => 'assets/images/bows/212719_ts-747369128.png',
                 'img4' => 'assets/images/bows/lazecky-skaut-padouk-dlouhy-luk-02.webp',
                 'price' => 299.99,
