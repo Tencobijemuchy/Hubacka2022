@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -31,7 +32,7 @@ class RegisterController extends Controller
 
         $user = User::create([
             'email'    => $request->email,
-            'username' => $request->username,
+            'username' => Hash::make($request->username),
             'password' => $request->password,
             'is_admin'  => false,
         ]);

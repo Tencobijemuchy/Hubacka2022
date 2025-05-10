@@ -132,7 +132,12 @@
                                         data-product-name="{{ $product->name }}"
                                         data-product-description="{{ $product->description }}"
                                         data-product-price="{{ number_format($product->price, 2) }}"
-                                        data-product-images="{{ json_encode([$product->img1, $product->img2, $product->img3, $product->img4]) }}">
+                                        data-product-images="{{ json_encode([
+                                            asset($product->img1),
+                                            asset($product->img2),
+                                            asset($product->img3),
+                                            asset($product->img4)
+                                        ]) }}">
                                     <i class="bi bi-gear"></i> Edit
                                 </button>
                                 <!-- DELETE BUTTON -->

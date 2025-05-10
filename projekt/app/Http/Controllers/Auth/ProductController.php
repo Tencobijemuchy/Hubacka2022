@@ -52,7 +52,9 @@ class ProductController extends Controller
                 'img4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
-            
+            if($validated['price'] <= 0){
+                return redirect()->back()->with('error', 'An error occurred: Product price must be greater than 0!');
+            }
 
 
             if ($request->input('product_type_id') == 1) {
@@ -364,7 +366,7 @@ class ProductController extends Controller
     
         $product->save();
     
-        return redirect()->route('adminPage')->with('success', 'Produkt bol úspešne aktualizovaný.');
+        return redirect()->route('adminPage')->with('success', 'Product updated successfully.');
     }
 
 

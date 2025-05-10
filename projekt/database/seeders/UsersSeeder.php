@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
 class UsersSeeder extends Seeder
@@ -16,7 +17,7 @@ class UsersSeeder extends Seeder
             [
                 'username' => 'admin',
                 'email' => 'admin@lukeshop.sk',
-                'password' => 'admin',
+                'password' => Hash::make('admin'),
                 'is_admin' => true,
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -24,7 +25,7 @@ class UsersSeeder extends Seeder
             [
                 'username' => 'rene',
                 'email' => 'rene@lukeshop.sk',
-                'password' => 'rene',
+                'password' => Hash::make('rene'),
                 'is_admin' => false,
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -32,7 +33,7 @@ class UsersSeeder extends Seeder
             [
                 'username' => 'Tencobijemuchy',
                 'email' => 'tencobijemuchy@lukeshop.sk',
-                'password' => 'rene',
+                'password' => Hash::make('rene'),
                 'is_admin' => true,
                 'created_at' => $now,
                 'updated_at' => $now,

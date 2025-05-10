@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
     editModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var productId = button.getAttribute('data-product-id');
+        var productTypeId = button.getAttribute('data-product-type-id');
         var productName = button.getAttribute('data-product-name');
         var productDescription = button.getAttribute('data-product-description');
         var productPrice = button.getAttribute('data-product-price');
@@ -296,7 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wrapper.appendChild(label);
 
             if (imgSrc) {
-
                 var imageEl = document.createElement('img');
                 imageEl.src = imgSrc;
                 imageEl.alt = 'Existing Image ' + slotNumber;
