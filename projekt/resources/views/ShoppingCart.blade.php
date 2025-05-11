@@ -155,6 +155,7 @@
                         <form action="{{ route('shopping-cart.destroy', $id) }}" method="POST">
                             @csrf
                             @method('DELETE')
+                            <input type="hidden" name="customizations" value="{{ base64_encode(json_encode($customizations ?? [])) }}">
                             <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
                         </form>
                     </div>

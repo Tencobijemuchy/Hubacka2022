@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addBowLengthButton').addEventListener('click', function() {
         var input = document.getElementById('bow_length_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             bowLengths.push(val);
             input.value = '';
             updateListsDisplay();
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addDrawWeightButton').addEventListener('click', function() {
         var input = document.getElementById('draw_weight_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             drawWeights.push(val);
             input.value = '';
             updateListsDisplay();
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addCrossbowDrawWeightButton').addEventListener('click', function() {
         var input = document.getElementById('crossbow_draw_weight_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             crossbow_draw_weight_list.push(val);
             input.value = '';
             updateListsDisplay();
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addCrossbowDrawWeightButton').addEventListener('click', function() {
         var input = document.getElementById('crossbow_draw_weight_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             crossbow_draw_weight_list.push(val);
             input.value = '';
             updateListsDisplay();
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('add_sling_shot_rubber_widthButton').addEventListener('click', function() {
         var input = document.getElementById('sling_shot_rubber_width_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             sling_shot_rubber_width_list.push(val);
             input.value = '';
             updateListsDisplay();
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('add_arrow_lengthButton').addEventListener('click', function() {
         var input = document.getElementById('arrow_length_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             arrow_length_list.push(val);
             input.value = '';
             updateListsDisplay();
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('add_arrow_diameterButton').addEventListener('click', function() {
         var input = document.getElementById('arrow_diameter_input');
         var val = input.value.trim();
-        if (val) {
+        if (val && val > 0) {
             arrow_diameter_list.push(val);
             input.value = '';
             updateListsDisplay();
@@ -223,11 +223,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var confirmButton = document.getElementById('confirmButton');
     confirmButton.addEventListener('click', function() {
+        var product_type_id = document.getElementById('product_type_id').value
 
+        if(document.getElementById('product_name').value.trim() === ""){
+            alert('Please add a product name!');
+            return;
+        }
+        if(document.getElementById('product_description').value.trim() === ""){
+            alert('Please add a product description!');
+            return;
+        }
+        if(document.getElementById('product_price').value <= 0){
+            alert('The product price must not be less than or equal to 0!');
+            return;
+        }
+
+        switch(product_type_id) {
+            case '1':
+                if(bowLengths.length === 0){
+                    alert('Please add bow lengths!');
+                    return;
+                }
+                if(drawWeights.length === 0){
+                    alert('Please add bow draw weights!');
+                    return;
+                }
+                if(orientations.length === 0){
+                    alert('Please add bow orientations!');
+                    return;
+                }
+                break;
+            case '2':
+                if(crossbow_draw_weight_list.length === 0){
+                    alert('Please add crossbow draw weights!');
+                    return;
+                }
+                break;
+            case '3':
+                if(sling_shot_rubber_width_list.length === 0){
+                    alert('Please add slingshot rubber widths!');
+                    return;
+                }
+                break;
+            case '4':
+                if(arrow_diameter_list.length === 0){
+                    alert('Please add arrow diamaters!');
+                    return;
+                }
+                if(arrow_length_list.length === 0){
+                    alert('Please add arrow lenghts!');
+                    return;
+                }
+                break;
+            case '5':
+                break;
+
+        }
+
+        var photo_count = 0;
         var p1 = document.getElementById('Photo1').files;
         var p2 = document.getElementById('Photo2').files;
-        if (!p1.length || !p2.length) {
-            alert('Please select Photo1 and Photo2');
+        var p3 = document.getElementById('Photo3').files;
+        var p4 = document.getElementById('Photo4').files;
+        (p1.length)?photo_count++ : photo_count;
+        (p2.length)?photo_count++ : photo_count;
+        (p3.length)?photo_count++ : photo_count;
+        (p4.length)?photo_count++ : photo_count;
+        if (photo_count<2) {
+            alert('Please select at least 2 photos!');
             return;
         }
         addProductForm.submit();
@@ -262,12 +325,20 @@ document.addEventListener('DOMContentLoaded', function() {
         form.action = '/admin/products/' + productId;
     });
 
+    document.getElementById('edit_modal_submit_btn').addEventListener('click',function(){
+        var productPrice = document.getElementById('edit_price').value;
+        if (!isNaN(productPrice) && productPrice > 0){
+            document.getElementById('editBowForm').submit();
+        }
+        else{
+            alert("The product price must be numeric and greater than 0!");
+        }
+    });
 
     var editModal = document.getElementById('modalModify');
     editModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var productId = button.getAttribute('data-product-id');
-        var productTypeId = button.getAttribute('data-product-type-id');
         var productName = button.getAttribute('data-product-name');
         var productDescription = button.getAttribute('data-product-description');
         var productPrice = button.getAttribute('data-product-price');
@@ -296,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
             label.textContent = 'IMG' + slotNumber;
             wrapper.appendChild(label);
 
-            if (imgSrc) {
+            if (imgSrc && !imgSrc.endsWith('/')) {
                 var imageEl = document.createElement('img');
                 imageEl.src = imgSrc;
                 imageEl.alt = 'Existing Image ' + slotNumber;

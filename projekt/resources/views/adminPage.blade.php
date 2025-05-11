@@ -158,6 +158,10 @@
                 </div>
             </div>
         @endforeach
+        <!-- Pagination links -->
+        <div class="justify-content-center mt-3">
+            {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 
 
@@ -249,7 +253,7 @@
                         <!-- Price -->
                         <div class="mb-3">
                             <label class="form-label">Price</label>
-                            <input type="number" class="form-control" name="price" id="product_price" step="0.01" required>
+                            <input type="number" class="form-control" name="price" id="product_price" step="0.01" min="0.01" required>
                         </div>
 
 
@@ -258,7 +262,7 @@
                         <div class="mb-3 d-none" id="field_bow_length">
                             <label class="form-label">Bow length</label>
                             <div class="input-group">
-                                <input type="text" id="bow_length_input" class="form-control" placeholder="Enter bow length"  required>
+                                <input type="text" id="bow_length_input" class="form-control" placeholder="Enter bow length"  pattern="^\d*\.?\d+$" required>
                                 <button type="button" id="addBowLengthButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="bowLengthList" class="text-muted"></small>
@@ -269,7 +273,7 @@
                         <div class="mb-3 d-none" id="field_draw_weight">
                             <label class="form-label">Draw weight</label>
                             <div class="input-group">
-                                <input type="text" id="draw_weight_input" class="form-control" placeholder="Enter draw weight"  required>
+                                <input type="text" id="draw_weight_input" class="form-control" placeholder="Enter draw weight"  pattern="^\d*\.?\d+$" required>
                                 <button type="button" id="addDrawWeightButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="drawWeightList" class="text-muted"></small>
@@ -295,7 +299,7 @@
                         <div class="mb-3 d-none" id="field_crossbow_draw_weight">
                             <label class="form-label">Draw weight</label>
                             <div class="input-group">
-                                <input type="text" id="crossbow_draw_weight_input" class="form-control" placeholder="Enter draw weight" required>
+                                <input type="text" id="crossbow_draw_weight_input" class="form-control" placeholder="Enter draw weight" pattern="^\d*\.?\d+$" required>
                                 <button type="button" id="addCrossbowDrawWeightButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="crossbowDrawWeightList" class="text-muted"></small>
@@ -306,7 +310,7 @@
                         <div class="mb-3 d-none" id="field_sling_shot_rubber_width">
                             <label class="form-label">Rubber Width</label>
                             <div class="input-group">
-                                <input type="text" id="sling_shot_rubber_width_input" class="form-control" placeholder="Enter Rubber Width" required>
+                                <input type="text" id="sling_shot_rubber_width_input" class="form-control" placeholder="Enter Rubber Width" pattern="^\d*\.?\d+$" required>
                                 <button type="button" id="add_sling_shot_rubber_widthButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="sling_shot_rubber_width_List" class="text-muted"></small>
@@ -319,7 +323,7 @@
                         <div class="mb-3 d-none" id="field_arrow_length">
                             <label class="form-label">Arrow Length</label>
                             <div class="input-group">
-                                <input type="text" id="arrow_length_input" class="form-control" placeholder="Enter Arrow Length" required>
+                                <input type="text" id="arrow_length_input" class="form-control" placeholder="Enter Arrow Length" pattern="^\d*\.?\d+$" required>
                                 <button type="button" id="add_arrow_lengthButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="arrow_length_List" class="text-muted"></small>
@@ -329,7 +333,7 @@
                         <div class="mb-3 d-none" id="field_arrow_diameter">
                             <label class="form-label">Arrow Diameter</label>
                             <div class="input-group">
-                                <input type="text" id="arrow_diameter_input" class="form-control" placeholder="Enter Arrow Diameter" required>
+                                <input type="text" id="arrow_diameter_input" class="form-control" placeholder="Enter Arrow Diameter" pattern="^\d*\.?\d+$" required>
                                 <button type="button" id="add_arrow_diameterButton" class="btn btn-outline-secondary">Add</button>
                             </div>
                             <small id="arrow_diameter_List" class="text-muted"></small>
@@ -342,11 +346,11 @@
                         <!-- Photo1 - Photo4 -->
                         <div class="mb-3">
                             <label class="form-label">Photo1</label>
-                            <input type="file" class="form-control" name="img1" id="Photo1" required>
+                            <input type="file" class="form-control" name="img1" id="Photo1">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Photo2</label>
-                            <input type="file" class="form-control" name="img2" id="Photo2" required>
+                            <input type="file" class="form-control" name="img2" id="Photo2">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Photo3</label>
@@ -398,7 +402,7 @@
                         <!-- PRODUCT PRICE -->
                         <div class="mb-3">
                             <label for="edit_price" class="form-label">Price</label>
-                            <input type="number" class="form-control" name="price" id="edit_price" step="0.01" required>
+                            <input type="text" class="form-control" name="price" id="edit_price" step="0.01" required>
                         </div>
 
                         <!-- EXISTING IMAGES SECTION -->
@@ -409,15 +413,11 @@
                             </div>
                         </div>
 
-
                         <div class="my-4 border-top"></div>
-
-
-
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
-                            <button type="submit" class="btn btn-primary">Confirm</button>
+                            <button type="button" class="btn btn-primary" id="edit_modal_submit_btn">Confirm</button>
                         </div>
                     </form>
                 </div>

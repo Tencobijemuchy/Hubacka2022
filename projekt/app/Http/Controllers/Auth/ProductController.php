@@ -26,7 +26,6 @@ class ProductController extends Controller
                 'price'            => 'required|numeric',
                 'manufacturer_id'  => 'required|exists:manufacturers,id',
 
-
                 'bow_length'       => 'nullable|array',
                 'bow_length.*'     => 'nullable|numeric',
                 'draw_weight'      => 'nullable|array',
@@ -46,22 +45,16 @@ class ProductController extends Controller
                 'arrow_diameter.*' => 'nullable|numeric',
 
 
-                'img1' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-                'img2' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-                'img3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-                'img4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'img1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+                'img2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+                'img3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+                'img4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
             ]);
-
-            if($validated['price'] <= 0){
-                return redirect()->back()->with('error', 'An error occurred: Product price must be greater than 0!');
-            }
 
 
             if ($request->input('product_type_id') == 1) {
 
                 $folderPrefix = 'assets/images/bows/';
-
-
             }
             elseif ($request->input('product_type_id') == 2) {
 
@@ -81,18 +74,21 @@ class ProductController extends Controller
             }
 
 
-            //prida preddefinovanu path k nazvu suboru
-            $imgPaths = [];
+            $uploadedImages = [];
+
             foreach (['img1', 'img2', 'img3', 'img4'] as $imgField) {
                 if ($request->hasFile($imgField)) {
                     $originalName = $request->file($imgField)->getClientOriginalName();
-
-                    $imgPaths[$imgField] = $folderPrefix . $originalName;
-                } else {
-                    $imgPaths[$imgField] = '';
+                    $uploadedImages[] = $folderPrefix . $originalName;
                 }
             }
-            //Log::info('File uploads  processed', $imgPaths);
+
+            $finalImages = [];
+            for ($i = 0; $i < 4; $i++) {
+                $finalImages['img' . ($i + 1)] = $uploadedImages[$i] ?? ''; 
+            }
+
+
 
             // 2) product
             $productData = [
@@ -101,10 +97,10 @@ class ProductController extends Controller
                 'name'            => $validated['name'],
                 'description'     => $validated['description'],
                 'price'           => $validated['price'],
-                'img1'            => $imgPaths['img1'],
-                'img2'            => $imgPaths['img2'],
-                'img3'            => $imgPaths['img3'],
-                'img4'            => $imgPaths['img4'],
+                'img1'            => $finalImages['img1'],
+                'img2'            => $finalImages['img2'],
+                'img3'            => $finalImages['img3'],
+                'img4'            => $finalImages['img4'],
             ];
 
             $nextProductId = DB::table('products')->max('id') + 1;
@@ -123,9 +119,6 @@ class ProductController extends Controller
                 if (isset($validated['bow_length'])) {
                     foreach ($validated['bow_length'] as $val) {
                         if (!empty($val)) {
-                            if($val < 0){
-                                return redirect()->back()->with('error', 'An error occurred: Product attribute can not be negative!');
-                            }
                             $specRows[] = [
                                 'product_id'   => $nextProductId,
                                 'attribute_id' => $bowLengthAttrId,
@@ -136,18 +129,13 @@ class ProductController extends Controller
                         }
                     }
                 }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid bow lenghts!' );
-                }
+
 
 
                 // draw_weight
                 if (isset($validated['draw_weight'])) {
                     foreach ($validated['draw_weight'] as $val) {
                         if (!empty($val)) {
-                            if($val < 0){
-                                return redirect()->back()->with('error', 'An error occurred: Product attribute can not be negative!');
-                            }
                             $specRows[] = [
                                 'product_id'   => $nextProductId,
                                 'attribute_id' => $drawWeightAttrId,
@@ -158,9 +146,7 @@ class ProductController extends Controller
                         }
                     }
                 }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid bow draw weights!' );
-                }
+
 
 
                 // orientation
@@ -177,9 +163,7 @@ class ProductController extends Controller
                         }
                     }
                 }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid bow orientation!' );
-                }
+
 
 
             } elseif ($productData['product_type_id'] == 2) {// crossbow
@@ -189,9 +173,6 @@ class ProductController extends Controller
                 if (isset($validated['crossbow_draw_weight'])) {
                     foreach ($validated['crossbow_draw_weight'] as $val) {
                         if (!empty($val)) {
-                            if($val < 0){
-                                return redirect()->back()->with('error', 'An error occurred: Product attribute can not be negative!');
-                            }
                             $specRows[] = [
                                 'product_id'   => $nextProductId,
                                 'attribute_id' => $drawWeightAttrId,
@@ -202,9 +183,7 @@ class ProductController extends Controller
                         }
                     }
                 }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid crossbow weights!' );
-                }
+
             }
             elseif ($productData['product_type_id'] == 3) {// slings
                 
@@ -213,9 +192,6 @@ class ProductController extends Controller
                 if (isset($validated['slingshot_rubber_width'])) {
                     foreach ($validated['slingshot_rubber_width'] as $val) {
                         if (!empty($val)) {
-                            if($val < 0){
-                                return redirect()->back()->with('error', 'An error occurred: Product attribute can not be negative!');
-                            }
                             $specRows[] = [
                                 'product_id'   => $nextProductId,
                                 'attribute_id' => $rubberWidthAttrId,
@@ -225,9 +201,6 @@ class ProductController extends Controller
                             ];
                         }
                     }
-                }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid slingshot rubber widths!' );
                 }
                 
             }
@@ -239,9 +212,6 @@ class ProductController extends Controller
                 if (isset($validated['arrow_length'])) {
                     foreach ($validated['arrow_length'] as $val) {
                         if (!empty($val)) {
-                            if($val < 0){
-                                return redirect()->back()->with('error', 'An error occurred: Product attribute can not be negative!');
-                            }
                             $specRows[] = [
                                 'product_id'   => $nextProductId,
                                 'attribute_id' => $arrowLengthAttrId,
@@ -252,16 +222,11 @@ class ProductController extends Controller
                         }
                     }
                 }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid arrow lenghts!' );
-                }
+
 
                 if (isset($validated['arrow_diameter'])) {
                     foreach ($validated['arrow_diameter'] as $val) {
                         if (!empty($val)) {
-                            if($val < 0){
-                                return redirect()->back()->with('error', 'An error occurred: Product attribute can not be negative!');
-                            }
                             $specRows[] = [
                                 'product_id'   => $nextProductId,
                                 'attribute_id' => $arrowDiameterAttrId,
@@ -271,9 +236,6 @@ class ProductController extends Controller
                             ];
                         }
                     }
-                }
-                else{
-                    return redirect()->back()->with('error', 'An error occurred: You did not add any valid arrow diameters!' );
                 }
                 
             }
@@ -287,7 +249,10 @@ class ProductController extends Controller
             $product = Product::create($productData);
             Log::info('Product created', $product->toArray());
 
-            if (!empty($specRows)) {
+            if ($product && !empty($specRows)) {
+                foreach ($specRows as &$row) {
+                    $row['product_id'] = $product->id;
+                }
                 DB::table('product_specifications')->insert($specRows);
                 Log::info('Product specifications inserted', $specRows);
             }
@@ -312,24 +277,20 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
-            'price'       => 'required|numeric', 
-    
-            'img1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'img2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'img3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'img4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        ]);
-    
-        $product->name        = $validated['name'];
-        $product->description = $validated['description'];
-        $product->price       = $validated['price'];
+            'price'       => 'required|numeric',
 
-        if($product->price < 0){
-            return redirect()->back()->with('error', 'An error occurred: Price can not be negative!' );
-        }
-    
-        $productTypeId = $product->product_type_id;
-    
+            'img1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'img2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'img3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'img4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp',
+        ]);
+
+        $product->name = $validated['name'];
+        $product->description = $validated['description'];
+        $product->price = $validated['price'];
+
+         $productTypeId = $product->product_type_id;
+
         if ($productTypeId == 1) {
             $folderPrefix = 'assets/images/bows/';
         } elseif ($productTypeId == 2) {
@@ -341,33 +302,58 @@ class ProductController extends Controller
         } elseif ($productTypeId == 5) {
             $folderPrefix = 'assets/images/other/';
         }
-    
-        foreach (['img1','img2','img3','img4'] as $imgField) {
-            if ($request->has("remove_$imgField")) {
-                if (!empty($product->$imgField) && file_exists(public_path($product->$imgField))) {
-                    unlink(public_path($product->$imgField)); 
+
+        $existingImages = [];
+        $imagesToRemove = [];
+
+        foreach (['img1', 'img2', 'img3', 'img4'] as $imgField) {
+            $removeField = 'remove_' . $imgField;
+
+            if ($request->has($removeField) && $request->$removeField == '1') {
+                if (!empty($product->$imgField)) {
+                    $imagesToRemove[] = $product->$imgField;
+                    $product->$imgField = ''; // clear from DB
                 }
-                $product->$imgField = '';
-            }
-    
-            if ($request->hasFile($imgField)) {
-                $originalName = $request->file($imgField)->getClientOriginalName();
-                $newPath = $folderPrefix . $originalName;
-    
-                $request->file($imgField)->move(public_path($folderPrefix), $originalName);
-    
-                if (!empty($product->$imgField) && file_exists(public_path($product->$imgField))) {
-                    unlink(public_path($product->$imgField));
+            } else {
+                if (!empty($product->$imgField)) {
+                    $existingImages[] = $product->$imgField;
                 }
-    
-                $product->$imgField = $newPath;
             }
         }
-    
+
+        foreach (['img1', 'img2', 'img3', 'img4'] as $imgField) {
+            if ($request->hasFile($imgField)) {
+                $file = $request->file($imgField);
+                $filename = $file->getClientOriginalName();
+                $file->move(public_path($folderPrefix), $filename);
+                $path = $folderPrefix . $filename;
+                $existingImages[] = $path;
+            }
+        }
+
+        if (count($existingImages) < 2) {
+            return redirect()->back()->with('error', 'You must have at least 2 images.');
+        }
+
+        foreach ($imagesToRemove as $imgPath) {
+            $fullPath = public_path($imgPath);
+            if (file_exists($fullPath)) {
+                unlink($fullPath);
+            }
+        }
+
+        $existingImages = array_pad($existingImages, 4, '');
+
+        $product->img1 = $existingImages[0];
+        $product->img2 = $existingImages[1];
+        $product->img3 = $existingImages[2];
+        $product->img4 = $existingImages[3];
+
         $product->save();
-    
+
         return redirect()->route('adminPage')->with('success', 'Product updated successfully.');
     }
+
 
 
     public function index()
@@ -399,16 +385,21 @@ class ProductController extends Controller
     public function showAdminPage(Request $request, $type = null)
     {
         $query = Product::query();
+
         if ($request->filled('name')) {
             $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
-            $type = null; 
+            $type = null;
         } elseif ($type !== null) {
             $query->where('product_type_id', $type);
         }
-        $products = $query->get(); 
+
+        $products = $query->orderBy('created_at', 'desc')->paginate(10);
+
         $manufacturers = Manufacturer::all();
+
         return view('adminPage', compact('products', 'manufacturers', 'type'));
     }
+
 
 
     public function destroy($id)

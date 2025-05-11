@@ -12,6 +12,7 @@ class CartController extends Controller
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity'); 
         $customizations = $request->input('customizations');
+        $customizations = empty($customizations) ? null : $customizations;
 
         if (auth()->check()) {
             $userId = auth()->id();
@@ -19,12 +20,14 @@ class CartController extends Controller
             $existingItem = DB::table('user_items')
                 ->where('user_id', $userId)
                 ->where('product_id', $productId)
+                ->where('customizations', json_encode($customizations))
                 ->first();
 
             if ($existingItem) {
                 DB::table('user_items')
                     ->where('user_id', $userId)
                     ->where('product_id', $productId)
+                    ->where('customizations', json_encode($customizations))
                     ->update([
                         'quantity' => $existingItem->quantity + $quantity,
                         'updated_at' => now(),
@@ -44,10 +47,12 @@ class CartController extends Controller
 
             $product = DB::table('products')->where('id', $productId)->first();
 
-            if (isset($cart[$productId])) {
-                $cart[$productId]['quantity'] += $quantity;
+            $customKey = $productId . '-' . md5(json_encode($customizations));
+
+            if (isset($cart[$customKey])) {
+                $cart[$customKey]['quantity'] += $quantity;
             } else {
-                $cart[$productId] = [
+                $cart[$customKey] = [
                     'id' => $productId,
                     'name' => $product->name,
                     'price' => $product->price,
@@ -57,7 +62,6 @@ class CartController extends Controller
                     'quantity' => $quantity,
                 ];
             }
-
             session()->put('cart', $cart);
         }
 
@@ -80,22 +84,48 @@ class CartController extends Controller
         return view('shoppingCart', compact('items', 'totalPrice'));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $encodedCustomizations = $request->input('customizations');
+        $decodedCustomizations = json_decode(base64_decode($encodedCustomizations), true);
+        $normalizedCustomizations = empty($decodedCustomizations) ? null : json_encode($decodedCustomizations);
+
         if (auth()->check()) {
             DB::table('user_items')
                 ->where('user_id', auth()->id())
                 ->where('product_id', $id)
+                ->where(function ($query) use ($normalizedCustomizations) {
+                    if (is_null($normalizedCustomizations)) {
+                        $query->whereNull('customizations');
+                    } else {
+                        $query->where('customizations', $normalizedCustomizations);
+                    }
+                })
                 ->delete();
         } else {
             $cart = session()->get('cart', []);
-            if (isset($cart[$id])) {
-                unset($cart[$id]);
-                session()->put('cart', $cart);
+
+            foreach ($cart as $key => $item) {
+                $itemCustoms = $item['customizations'] ?? null;
+
+                if (
+                    $item['id'] == $id &&
+                    (
+                        (empty($itemCustoms) && empty($decodedCustomizations)) ||
+                        json_encode($itemCustoms) === json_encode($decodedCustomizations)
+                    )
+                ) {
+                    unset($cart[$key]);
+                    break;
+                }
             }
+
+            session()->put('cart', $cart);
         }
+
         return redirect()->back()->with('success', 'Item removed from cart.');
     }
+
 
     public function updateQuantity(Request $request)
     {
