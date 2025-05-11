@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -52,27 +52,7 @@ class ProductController extends Controller
             ]);
 
 
-            if ($request->input('product_type_id') == 1) {
-
-                $folderPrefix = 'assets/images/bows/';
-            }
-            elseif ($request->input('product_type_id') == 2) {
-
-                $folderPrefix = 'assets/images/crossbows/';
-            }
-            elseif ($request->input('product_type_id') == 3) {
-
-                $folderPrefix = 'assets/images/slings/';
-            }
-            elseif ($request->input('product_type_id') == 4) {
-
-                $folderPrefix = 'assets/images/arrows/';
-            }
-            elseif ($request->input('product_type_id') == 5) {
-
-                $folderPrefix = 'assets/images/other/';
-            }
-
+            $folderPrefix = 'assets/images/';
 
             $uploadedImages = [];
 
@@ -290,18 +270,9 @@ class ProductController extends Controller
         $product->price = $validated['price'];
 
          $productTypeId = $product->product_type_id;
-
-        if ($productTypeId == 1) {
-            $folderPrefix = 'assets/images/bows/';
-        } elseif ($productTypeId == 2) {
-            $folderPrefix = 'assets/images/crossbows/';
-        } elseif ($productTypeId == 3) {
-            $folderPrefix = 'assets/images/slings/';
-        } elseif ($productTypeId == 4) {
-            $folderPrefix = 'assets/images/arrows/';
-        } elseif ($productTypeId == 5) {
-            $folderPrefix = 'assets/images/other/';
-        }
+         
+         $folderPrefix = 'assets/images/';
+    
 
         $existingImages = [];
         $imagesToRemove = [];
